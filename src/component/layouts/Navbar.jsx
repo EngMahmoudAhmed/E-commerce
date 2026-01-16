@@ -26,7 +26,7 @@ const Navbar = () => {
                 "Home",
                 "About",
                 "Careers",
-                "History",
+                "Products",
                 "Services",
                 "Projects",
                 "Blog",
