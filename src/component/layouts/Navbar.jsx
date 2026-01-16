@@ -23,6 +23,7 @@ const Navbar = () => {
           <nav aria-label="Global" className="hidden md:block">
             <ul className="flex items-center gap-6 text-sm">
               {[
+                "Home",
                 "About",
                 "Careers",
                 "History",
@@ -32,7 +33,7 @@ const Navbar = () => {
               ].map((item) => (
                 <li key={item}>
                   <Link
-                    href="#"
+                    // href="#"
                     className="text-gray-500 transition hover:text-gray-500/75 dark:text-black dark:hover:text-white/75"
                     to={item}
                   >
