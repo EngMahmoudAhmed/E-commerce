@@ -13,6 +13,9 @@ function ProductSkeleton() {
           <div className="h-4 w-16 bg-gray-200 rounded" />
           <div className="h-8 w-24 bg-gray-200 rounded-lg" />
         </div>
+        <div className="flex items-center justify-center">
+          <div className="h-8 w-14 bg-gray-200 rounded-lg" />
+        </div>
       </div>
     </div>
   );

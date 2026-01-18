@@ -2,7 +2,7 @@ function CategoryButton({ label, active, onClick }) {
   return (
     <button
       onClick={onClick}
-      className={`px-5 py-2 rounded-full text-sm font-medium capitalize transition
+      className={`px-5 py-2 cursor-pointer rounded-full text-sm font-medium capitalize transition
         ${
           active
             ? "bg-gray-900 text-white"

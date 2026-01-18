@@ -62,7 +62,7 @@ function Products() {
       {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
          {loading
-          ? Array.from({ length: 8 }).map((_, i) => (
+          ? Array.from({ length: 10 }).map((_, i) => (
             <ProductSkeleton key={i} />
           )) :
           filteredProducts.map(product=> 
