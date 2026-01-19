@@ -1,9 +1,13 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../features/auth/hooks/useAuth";
 
 function ProtectedRoute({ children }) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
+  if (loading) {
+    return <div>Loading...</div>; // Skeleton / Spinner
+  }
+  
   if (!user) {
     return <Navigate to="/login" />;
   }

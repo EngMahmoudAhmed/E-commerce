@@ -1,5 +1,6 @@
 import  supabase  from "../../lib/supabase";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom"; 
 
 export const Login = () => {
   const {
@@ -9,18 +10,22 @@ export const Login = () => {
     reset,
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     console.log("Login data", data);
     const { email, password } = data;
 
-    const { erorr } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    })
-    if (erorr) {
-      alert(erorr.message);
+    });
+
+    if (error) {
+      alert(error.message);
     } else {
       alert("Logged in successfully");
+      navigate("/home"); 
     }
     reset();
   };
@@ -47,7 +52,7 @@ export const Login = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm/6 font-medium text-gray-100"
+              className="block text-sm/6 font-medium"
             >
               Email address
             </label>
@@ -63,7 +68,7 @@ export const Login = () => {
                     message: "Invalid email format",
                   },
                 })}
-                className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                className="block w-full rounded-md bg-gray-800 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
               />
             </div>
             {errors.email && (
@@ -75,7 +80,7 @@ export const Login = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm/6 font-medium text-gray-100"
+                className="block text-sm/6 font-medium"
               >
                 Password
               </label>
@@ -92,7 +97,7 @@ export const Login = () => {
                     message: "Password must be at least 6 characters",
                   },
                 })}
-                className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                className="block w-full rounded-md bg-gray-800 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
               />
             </div>
             <div className="text-sm mt-4">

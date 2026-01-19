@@ -1,23 +1,47 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import MainLayout from "../component/layouts/MainLayout.jsx";
 import Login from "../features/auth/Login";
 import Register from "../features/auth/Register.jsx";
 import Home from "../component/layouts/Home.jsx";
 import Products from "../data/fakeProducts.jsx";
 import AboutUs from "../component/layouts/AboutUs.jsx";
+import ProtectedRoute from "../routes/ProtectedRoute.jsx";
+
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,  // كل شيء جوه MainLayout
+    element: <MainLayout />, // كل شيء جوه MainLayout
     children: [
+      {
+        path: "/home",
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/products",
+        element: (
+          <ProtectedRoute>
+            <Products />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/aboutus",
+        element: (
+          <ProtectedRoute>
+            <AboutUs />
+          </ProtectedRoute>
+        ),
+      },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
-      { path: "/home", element: <Home /> },
-      { path: "/products", element: <Products /> },
-      { path: "/aboutus", element: <AboutUs /> },
-      {}
-
-
     ],
+  },
+  {
+    path: "*",
+    element: <Navigate to="/register" />, // توجيه أي مسار غير معروف إلى صفحة Register
   },
 ]);
