@@ -1,63 +1,118 @@
-export default function Home() {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      
-      {/* Hero Section */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          
-          <div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Build Modern React Apps
-            </h1>
+import { Link } from "react-router-dom";
+import {
+  ShoppingCart,
+  Truck,
+  ShieldCheck,
+  BadgeCheck,
+  ArrowRight,
+} from "lucide-react";
 
-            <p className="mt-4 text-lg text-gray-600">
-              This Home component is built using React and Tailwind CSS only.
-              Clean, responsive, and scalable.
+const features = [
+  {
+    icon: <Truck className="h-7 w-7" />,
+    title: "Fast Delivery",
+    desc: "Quick and reliable shipping for all orders.",
+  },
+  {
+    icon: <ShieldCheck className="h-7 w-7" />,
+    title: "Secure Payments",
+    desc: "Your payment information is fully protected.",
+  },
+  {
+    icon: <BadgeCheck className="h-7 w-7" />,
+    title: "Premium Quality",
+    desc: "Carefully selected products you can trust.",
+  },
+];
+
+const categories = ["Electronics", "Fashion", "Home & Living", "Beauty"];
+
+const Home = () => {
+  return (
+    <main>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-indigo-600 to-purple-600 py-20 text-white">
+        <div className="mx-auto max-w-7xl px-4 grid gap-12 lg:grid-cols-2 items-center">
+          <div>
+            <h1 className="text-4xl font-bold leading-tight sm:text-5xl">
+              Shop Smarter.
+              <span className="block">Live Better.</span>
+            </h1>
+            <p className="mt-6 text-indigo-100 max-w-lg">
+              Discover high-quality products at unbeatable prices, delivered
+              straight to your door.
             </p>
 
-            <div className="mt-6 flex gap-4">
-              <button className="px-6 py-3 rounded-2xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition">
-                Get Started
+            <div className="mt-8 flex gap-4">
+              <button className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-indigo-600 hover:bg-gray-100">
+                <Link to="/products">Shop Now</Link>
+                <ShoppingCart className="h-5 w-5" />
               </button>
 
-              <button className="px-6 py-3 rounded-2xl border border-gray-300 text-gray-700 hover:bg-gray-100 transition">
-                Learn More
+              <button className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-3 hover:bg-white/10">
+                <Link to="/products">Explore</Link>
+                <ArrowRight className="h-5 w-5" />
               </button>
             </div>
           </div>
 
-          <div className="h-64 md:h-80 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg" />
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          
-          <h2 className="text-3xl font-bold text-center text-gray-900">
-            Features
-          </h2>
-
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Feature title="React Components" />
-            <Feature title="Tailwind Styling" />
-            <Feature title="Responsive Layout" />
+          {/* Hero Image Placeholder */}
+          <div className="hidden lg:block">
+            <div className="h-80 w-full rounded-3xl bg-white/10 backdrop-blur"></div>
           </div>
         </div>
       </section>
 
-    </div>
-  );
-}
+      {/* Features */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((item, index) => (
+            <div
+              key={index}
+              className="rounded-2xl bg-white p-6 text-center shadow-sm hover:shadow-md transition"
+            >
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
+                {item.icon}
+              </div>
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="mt-2 text-sm text-gray-600">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-function Feature({ title }) {
-  return (
-    <div className="bg-white p-6 rounded-2xl shadow hover:shadow-md transition">
-      <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-      <p className="mt-2 text-gray-600">
-        Built using modern React best practices and utility-first Tailwind CSS.
-      </p>
-    </div>
+      {/* Categories */}
+      <section className="bg-gray-50 py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-8 text-center text-3xl font-bold">
+            Shop by Category
+          </h2>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {categories.map((cat, index) => (
+              <div
+                key={index}
+                className="flex h-40 items-center justify-center rounded-2xl bg-white font-semibold shadow-sm hover:shadow-md transition cursor-pointer"
+              >
+                {cat}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 text-center">
+        <h2 className="text-3xl font-bold">Ready to Start Shopping?</h2>
+        <p className="mt-4 text-gray-600">
+          Join thousands of happy customers today.
+        </p>
+        <button className="mt-8 rounded-xl bg-indigo-600 px-8 py-3 font-semibold text-white hover:bg-indigo-700">
+          <Link to="/products">Browse Products</Link>
+        </button>
+      </section>
+    </main>
   );
-}
+};
+
+export default Home;

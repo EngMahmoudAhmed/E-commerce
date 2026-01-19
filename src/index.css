@@ -2,4 +2,12 @@
 body{
     color: black;
 }
+@theme {
+    --primary-color:oklch(51.1% 0.262 276.966);
+}
+/* 
+button{
+    background-color: oklch(51.1% 0.262 276.966) !important;
+    color: #FFF;
+} */
 @import 'tailwindcss'

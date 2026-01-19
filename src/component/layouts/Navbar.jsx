@@ -24,12 +24,9 @@ const Navbar = () => {
             <ul className="flex items-center gap-6 text-sm">
               {[
                 "Home",
-                "About",
-                "Careers",
+                "AboutUs",
                 "Products",
                 "Services",
-                "Projects",
-                "Blog",
               ].map((item) => (
                 <li key={item}>
                   <Link

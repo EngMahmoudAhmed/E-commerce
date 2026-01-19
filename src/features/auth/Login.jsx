@@ -1,4 +1,6 @@
+import  supabase  from "../../lib/supabase";
 import { useForm } from "react-hook-form";
+
 export const Login = () => {
   const {
     register,
@@ -7,8 +9,19 @@ export const Login = () => {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Login data", data);
+    const { email, password } = data;
+
+    const { erorr } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+    if (erorr) {
+      alert(erorr.message);
+    } else {
+      alert("Logged in successfully");
+    }
     reset();
   };
   return (

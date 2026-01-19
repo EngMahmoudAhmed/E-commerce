@@ -4,8 +4,7 @@ import Login from "../features/auth/Login";
 import Register from "../features/auth/Register.jsx";
 import Home from "../component/layouts/Home.jsx";
 import Products from "../data/fakeProducts.jsx";
-// import Home from "./pages/Home";
-
+import AboutUs from "../component/layouts/AboutUs.jsx";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +14,9 @@ export const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "/home", element: <Home /> },
       { path: "/products", element: <Products /> },
+      { path: "/aboutus", element: <AboutUs /> },
+      {}
+
 
     ],
   },

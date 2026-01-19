@@ -25,7 +25,7 @@ function ProductCard({ product }) {
         <div className="flex items-center"> 
           <button
             onClick={() => addToCart(product)}
-            className="px-4 m-auto py-2 cursor-pointer bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-800 transition"
+            className="px-4 m-auto py-2 cursor-pointer bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-900 transition"
           >
             Add
           </button>

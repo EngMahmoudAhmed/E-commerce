@@ -1,4 +1,5 @@
 // import { rules } from "eslint-plugin-react-hooks";
+import  supabase  from "../../lib/supabase";
 import { useForm } from "react-hook-form";
 export const Login = () => {
   const {
@@ -11,8 +12,19 @@ export const Login = () => {
 
   const password = watch("password");
 
-  const onSubmit =  (data) => {
+  const onSubmit = async (data) => {
     console.log("Login data", data);
+    const { email, password } = data;
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    if (erorr) {
+      alert(error.message);
+    } else {
+      alert("check your email to confirm your account");
+    }
     reset();
   };
   return (
@@ -47,6 +59,7 @@ export const Login = () => {
                 id="name"
                 name="name"
                 type="text"
+                placeholder="Enter your Name"
                 {...register("name", {
                   required: "Name is required",
                   minLength: {
@@ -76,6 +89,7 @@ export const Login = () => {
                 id="email"
                 name="email"
                 type="email"
+                placeholder="Enter your Email"
                 {...register("email", {
                   required: "email is required",
                   pattern: {
@@ -99,19 +113,18 @@ export const Login = () => {
               >
                 Password
               </label>
-              
             </div>
             <div className="mt-2">
               <input
                 id="password"
                 name="password"
                 type="password"
+                placeholder="Enter your Password"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
                     value: 8,
                     message: "Password must be at least 6 characters",
-                    
                   },
                 })}
                 className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
@@ -130,22 +143,25 @@ export const Login = () => {
               >
                 Confirm Password
               </label>
-              
             </div>
             <div className="mt-2">
               <input
                 id="confirmpassword"
                 name="confirmpassword"
                 type="password"
-                {...register("confirmpassword", { required: "password is required",
-                    validate:(value)=>
-                        value === password || "password don't match"
-                 })}
+                placeholder="Confirm Password"
+                {...register("confirmpassword", {
+                  required: "password is required",
+                  validate: (value) =>
+                    value === password || "password don't match",
+                })}
                 className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
               />
             </div>
             {errors.confirmPassword && (
-              <span className="text-red-600">{errors.confirmPassword.message}</span>
+              <span className="text-red-600">
+                {errors.confirmPassword.message}
+              </span>
             )}
           </div>
 
@@ -155,7 +171,7 @@ export const Login = () => {
               className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               disabled={isSubmitting}
             >
-              {isSubmitting ?  "Creating Account..." : "Register"}
+              {isSubmitting ? "Creating Account..." : "Register"}
             </button>
           </div>
         </form>
