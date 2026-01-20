@@ -1,6 +1,6 @@
-import  supabase  from "../../lib/supabase";
+import supabase from "../../lib/supabase";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const {
@@ -13,7 +13,6 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log("Login data", data);
     const { email, password } = data;
 
     const { error } = await supabase.auth.signInWithPassword({
@@ -23,9 +22,11 @@ export const Login = () => {
 
     if (error) {
       alert(error.message);
+    } else if (!user?.email_confirmed_at) {
+      alert("Please confirm your email before logging in.");
     } else {
       alert("Logged in successfully");
-      navigate("/home"); 
+      navigate("/home");
     }
     reset();
   };
@@ -50,10 +51,7 @@ export const Login = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm/6 font-medium"
-            >
+            <label htmlFor="email" className="block text-sm/6 font-medium">
               Email address
             </label>
             <div className="mt-2">
@@ -64,7 +62,7 @@ export const Login = () => {
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
-                    value: /^\S+@\S+$/i,
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                     message: "Invalid email format",
                   },
                 })}
@@ -78,10 +76,7 @@ export const Login = () => {
 
           <div>
             <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="block text-sm/6 font-medium"
-              >
+              <label htmlFor="password" className="block text-sm/6 font-medium">
                 Password
               </label>
             </div>

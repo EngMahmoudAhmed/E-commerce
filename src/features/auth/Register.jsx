@@ -1,7 +1,8 @@
 // import { rules } from "eslint-plugin-react-hooks";
 import  supabase  from "../../lib/supabase";
 import { useForm } from "react-hook-form";
-export const Login = () => {
+import { useNavigate } from "react-router-dom";
+const Register = () => {
   const {
     register,
     handleSubmit,
@@ -11,20 +12,32 @@ export const Login = () => {
   } = useForm();
 
   const password = watch("password");
+  const navigate = useNavigate()
+
 
   const onSubmit = async (data) => {
-    console.log("Login data", data);
     const { email, password } = data;
+    console.log("Register payload", { email, password });
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-    if (erorr) {
-      alert(error.message);
-    } else {
-      alert("check your email to confirm your account");
+    try {
+      const { data: resData, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+      console.log("signUp result", resData, error);
+
+      if (error) {
+        console.error(error);
+        alert(error.message || "Signup failed");
+      } else {
+        alert("Check your email to confirm your account");
+        navigate("/login");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Signup failed");
     }
+
     reset();
   };
   return (
@@ -50,7 +63,7 @@ export const Login = () => {
           <div>
             <label
               htmlFor="name"
-              className="block text-sm/6 font-medium text-gray-100"
+              className="block text-sm/6 font-medium text-gray-900"
             >
               Name
             </label>
@@ -79,7 +92,7 @@ export const Login = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="email"
-                className="block text-sm/6 font-medium text-gray-100"
+                className="block text-sm/6 font-medium text-gray-900"
               >
                 Email
               </label>
@@ -109,7 +122,7 @@ export const Login = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm/6 font-medium text-gray-100"
+                className="block text-sm/6 font-medium text-gray-900"
               >
                 Password
               </label>
@@ -124,7 +137,7 @@ export const Login = () => {
                   required: "Password is required",
                   minLength: {
                     value: 8,
-                    message: "Password must be at least 6 characters",
+                    message: "Password must be at least 8 characters",
                   },
                 })}
                 className="block w-full rounded-md bg-gray-800 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
@@ -139,7 +152,7 @@ export const Login = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="confirmpassword"
-                className="block text-sm/6 font-medium text-gray-100"
+                className="block text-sm/6 font-medium text-gray-900"
               >
                 Confirm Password
               </label>
@@ -158,9 +171,9 @@ export const Login = () => {
                 className="block w-full rounded-md bg-gray-800 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
               />
             </div>
-            {errors.confirmPassword && (
+            {errors.confirmpassword && (
               <span className="text-red-600">
-                {errors.confirmPassword.message}
+                {errors.confirmpassword.message}
               </span>
             )}
           </div>
@@ -190,4 +203,4 @@ export const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
