@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import supabase from "../../lib/supabase";
 import { useAuth } from "../../context/AuthContext";
 
-export const VerifyEmail = () => {
+const VerifyEmail = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -93,3 +93,5 @@ export const VerifyEmail = () => {
     </div>
   );
 };
+
+export default VerifyEmail;

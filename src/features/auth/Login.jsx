@@ -15,19 +15,31 @@ export const Login = () => {
   const onSubmit = async (data) => {
     const { email, password } = data;
 
-    const { error } = await supabase.auth.signInWithPassword({
+      const { data: signInData, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
-    if (error) {
-      alert(error.message);
-    } else if (!user?.email_confirmed_at) {
-      alert("Please confirm your email before logging in.");
-    } else {
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      const signedUser = signInData?.user ?? signInData?.session?.user;
+
+      if (!signedUser) {
+        alert("Login succeeded but no user returned. Check console for details.");
+        console.log("signIn data", signInData);
+        return;
+      }
+
+      if (!signedUser.email_confirmed_at) {
+        alert("Please confirm your email before logging in.");
+        return;
+      }
+
       alert("Logged in successfully");
       navigate("/home");
-    }
     reset();
   };
   return (

@@ -31,7 +31,7 @@ const Register = () => {
         alert(error.message || "Signup failed");
       } else {
         alert("Check your email to confirm your account");
-        navigate("/login");
+        navigate("/verify-email");
       }
     } catch (err) {
       console.error(err);
