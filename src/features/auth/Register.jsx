@@ -1,5 +1,5 @@
 // import { rules } from "eslint-plugin-react-hooks";
-import  supabase  from "../../lib/supabase";
+import supabase from "../../lib/supabase";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
@@ -31,7 +31,7 @@ const Register = () => {
         alert(error.message || "Signup failed");
       } else {
         alert("Check your email to confirm your account");
-        navigate("/verify-email");
+        navigate("/verify-email", { state: { email } });
       }
     } catch (err) {
       console.error(err);
