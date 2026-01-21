@@ -37,7 +37,7 @@ const VerifyEmail = () => {
           if (data.session?.user?.email_confirmed_at) {
             setMessage("Email verified successfully! Redirecting...");
             setTimeout(() => {
-              navigate("/home", { replace: true });
+              navigate("/login", { replace: true });
             }, 1500);
           } else {
             setCheckingEmail(false);

@@ -1,11 +1,39 @@
-import { Link } from "react-router-dom";
-const Navbar = () => {
-  return (
-    <header className="bg-white shadow-xl text-black p-3 px-5 ">
-      <div className="mx-auto flex h-16 w-full items-center gap-8 px-4 sm:px-6 lg:px-8">
-        <a className="block text-teal-600 dark:text-teal-300" href="#">
-          <span className="sr-only">Home</span>
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import supabase from "../../lib/supabase";
 
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    closeMenu();
+    navigate("/login");
+  };
+
+  const navItems = [
+    { name: "Home", path: "/home" },
+    { name: "AboutUs", path: "/aboutus" },
+    { name: "Products", path: "/products" },
+    { name: "Services", path: "/services" },
+  ];
+
+  return (
+    <header className="bg-white shadow-xl text-black p-3 px-5 relative">
+      <div className="mx-auto flex h-16 w-full items-center gap-8 px-4 sm:px-6 lg:px-8">
+        <Link to="/home" className="block text-teal-600 dark:text-teal-300">
+          <span className="sr-only">Home</span>
           <svg
             className="h-8"
             viewBox="0 0 28 24"
@@ -17,24 +45,18 @@ const Navbar = () => {
               fill="currentColor"
             />
           </svg>
-        </a>
+        </Link>
 
         <div className="flex flex-1 items-center justify-end md:justify-between">
           <nav aria-label="Global" className="hidden md:block">
             <ul className="flex items-center gap-6 text-sm">
-              {[
-                "Home",
-                "AboutUs",
-                "Products",
-                "Services",
-              ].map((item) => (
-                <li key={item}>
+              {navItems.map((item) => (
+                <li key={item.name}>
                   <Link
-                    // href="#"
                     className="text-gray-500 transition hover:text-gray-500/75 dark:text-black dark:hover:text-white/75"
-                    to={item}
+                    to={item.path}
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}
@@ -42,44 +64,145 @@ const Navbar = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <div className="sm:flex sm:gap-4">
-              <Link
-                href="#"
-                className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
-                to="/login"
-              >
-                Login
-              </Link>
+            {/* Show Login/Register only when user is NOT logged in */}
+            {!user && (
+              <div className="hidden sm:flex sm:gap-4">
+                <Link
+                  className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                  to="/login"
+                >
+                  Login
+                </Link>
 
-              <Link
-                href="#"
-                className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
-                to="/Register"
-              >
-                Register
-              </Link>
-            </div>
+                <Link
+                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                  to="/register"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
 
-            <button className="block rounded-sm bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden dark:bg-gray-800 dark:text-white dark:hover:text-white/75">
+            {/* Show User Info and Logout when user IS logged in */}
+            {user && (
+              <div className="hidden sm:flex sm:items-center sm:gap-4">
+                <span className="text-sm text-gray-600 dark:text-gray-300">
+                  {user.email}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+
+            <button
+              onClick={toggleMenu}
+              className="block rounded-sm bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+              aria-label="Toggle menu"
+            >
               <span className="sr-only">Toggle menu</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="size-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+              {isMenuOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
             </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50">
+          <nav aria-label="Mobile navigation" className="px-4 py-4">
+            <ul className="space-y-2">
+              {navItems.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
+                    onClick={closeMenu}
+                    className="block px-4 py-3 text-gray-700 rounded-md hover:bg-gray-100 transition"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+              
+              {/* Show Login/Register in mobile menu only when NOT logged in */}
+              {!user && (
+                <>
+                  <li className="border-t border-gray-200 pt-2 mt-2">
+                    <Link
+                      to="/login"
+                      onClick={closeMenu}
+                      className="block px-4 py-3 rounded-md bg-teal-600 text-white text-center hover:bg-teal-700 transition"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/register"
+                      onClick={closeMenu}
+                      className="block px-4 py-3 rounded-md bg-gray-100 text-teal-600 text-center hover:bg-gray-200 transition"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                </>
+              )}
+
+              {/* Show User Info and Logout in mobile menu when logged in */}
+              {user && (
+                <>
+                  <li className="border-t border-gray-200 pt-2 mt-2">
+                    <div className="px-4 py-3 text-sm text-gray-600">
+                      {user.email}
+                    </div>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full block px-4 py-3 rounded-md bg-red-600 text-white text-center hover:bg-red-700 transition"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
+              )}
+            </ul>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
