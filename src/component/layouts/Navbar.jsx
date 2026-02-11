@@ -26,13 +26,13 @@ const Navbar = () => {
     { name: "Home", path: "/home" },
     { name: "AboutUs", path: "/aboutus" },
     { name: "Products", path: "/products" },
-    { name: "Services", path: "/services" },
+    // { name: "Services", path: "/services" },
   ];
 
   return (
     <header className="bg-white shadow-xl text-black p-3 px-5 relative">
       <div className="mx-auto flex h-16 w-full items-center gap-8 px-4 sm:px-6 lg:px-8">
-        <Link to={user?"/home" : "/login"} className="block text-teal-600 dark:text-teal-300">
+        <Link to={user?"/home" : "/home"} className="block text-teal-600 dark:text-teal-300">
           <span className="sr-only">Home</span>
           <svg
             className="h-8"

@@ -40,10 +40,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <Navigate to="/register" />, // توجيه أي مسار غير معروف إلى صفحة Register
-  },
-  {
-    path: "*",
     element: <Home />, // توجيه أي مسار غير معروف إلى صفحة Register
   },
 ]);
