@@ -1,6 +1,7 @@
 import supabase from "../../lib/supabase";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const {
@@ -21,33 +22,33 @@ const Login = () => {
     });
 
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
       return;
     }
 
     const signedUser = signInData?.user ?? signInData?.session?.user;
 
     if (!signedUser) {
-      alert("Login succeeded but no user returned. Check console for details.");
+      toast.success("Login succeeded but no user returned. Check console for details.");
       console.log("signIn data", signInData);
       return;
     }
 
     if (!signedUser.email_confirmed_at) {
-      alert("Please confirm your email before logging in.");
+      toast.warn("Please confirm your email before logging in.");
       navigate("/verify-email", { state: { email: signedUser.email } });
       reset();
       return;
     }
 
     setTimeout(() => {
-      alert("Logged in successfully");
+      toast.success("Logged in successfully");
       navigate("/home");
       reset();
     }, 100);
   };
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 text-black border-b-black">
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 border-b-black">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           alt="Your Company"
@@ -137,7 +138,7 @@ const Login = () => {
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm/6 text-gray-400">
+        <p className="mt-10 text-center text-sm/6">
           Not a member?{" "}
           <a
             href="#"

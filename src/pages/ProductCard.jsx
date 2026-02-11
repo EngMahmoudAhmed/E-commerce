@@ -1,6 +1,6 @@
 function ProductCard({ product }) {
   return (
-    <div className="bg-white hover:shadow-gray-700 rounded-2xl shadow-xl transition overflow-hidden">
+    <div className=" hover:shadow-gray-700 rounded-2xl shadow-xl transition overflow-hidden">
       <img
         src={product.thumbnail}
         alt={product.title}
@@ -19,8 +19,8 @@ function ProductCard({ product }) {
         </p>
 
         <div className="flex justify-between items-center mt-4">
-          <span className="font-bold text-gray-900">${product.price}</span>
-          <span className="text-sm text-gray-400">⭐ {product.rating}</span>
+          <span className="font-bold">${product.price}</span>
+          <span className="text-sm">⭐ {product.rating}</span>
         </div>
         <div className="flex items-center"> 
           <button

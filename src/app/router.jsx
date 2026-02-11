@@ -14,6 +14,10 @@ export const router = createBrowserRouter([
     element: <MainLayout />, // كل شيء جوه MainLayout
     children: [
       {
+        index: true,
+        element: <Navigate to="/home" replace />,
+      },
+      {
         path: "/home",
         element: (
             <Home />
@@ -40,6 +44,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <Home />, // توجيه أي مسار غير معروف إلى صفحة Register
+    element: <Navigate to="/home" replace />, // توجيه أي مسار غير معروف إلى الصفحة الافتراضية
   },
 ]);

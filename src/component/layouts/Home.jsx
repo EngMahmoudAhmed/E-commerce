@@ -31,20 +31,20 @@ const Home = () => {
   return (
     <main>
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-indigo-600 to-purple-600 py-20 text-white">
+      <section className="bg-gradient-to-r from-indigo-600 to-purple-600 py-20">
         <div className="mx-auto max-w-7xl px-4 grid gap-12 lg:grid-cols-2 items-center">
           <div>
             <h1 className="text-4xl font-bold leading-tight sm:text-5xl">
               Shop Smarter.
               <span className="block">Live Better.</span>
             </h1>
-            <p className="mt-6 text-indigo-100 max-w-lg">
+            <p className="mt-6 max-w-lg">
               Discover high-quality products at unbeatable prices, delivered
               straight to your door.
             </p>
 
             <div className="mt-8 flex gap-4">
-              <button className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-indigo-600 hover:bg-gray-100">
+              <button className="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold border border-white/30 hover:bg-white/10">
                 <Link to="/products">Shop Now</Link>
                 <ShoppingCart className="h-5 w-5" />
               </button>
@@ -58,7 +58,7 @@ const Home = () => {
 
           {/* Hero Image Placeholder */}
           <div className="hidden lg:block">
-            <div className="h-80 w-full rounded-3xl bg-white/10 backdrop-blur"></div>
+            <div className="h-80 w-full rounded-3xl backdrop-blur"></div>
           </div>
         </div>
       </section>
@@ -69,7 +69,7 @@ const Home = () => {
           {features.map((item, index) => (
             <div
               key={index}
-              className="rounded-2xl bg-white p-6 text-center shadow-sm hover:shadow-md transition"
+              className="rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition"
             >
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
                 {item.icon}
@@ -82,7 +82,7 @@ const Home = () => {
       </section>
 
       {/* Categories */}
-      <section className="bg-gray-50 py-16">
+      <section className="py-16">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="mb-8 text-center text-3xl font-bold">
             Shop by Category
@@ -92,7 +92,7 @@ const Home = () => {
             {categories.map((cat, index) => (
               <div
                 key={index}
-                className="flex h-40 items-center justify-center rounded-2xl bg-white font-semibold shadow-sm hover:shadow-md transition cursor-pointer"
+                className="flex h-40 items-center justify-center rounded-2xl font-semibold shadow-sm hover:shadow-md transition cursor-pointer"
               >
                 {cat}
               </div>

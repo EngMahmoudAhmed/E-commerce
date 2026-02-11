@@ -2,6 +2,7 @@
 import supabase from "../../lib/supabase";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Register = () => {
   const {
     register,
@@ -28,20 +29,20 @@ const Register = () => {
 
       if (error) {
         console.error(error);
-        alert(error.message || "Signup failed");
+        toast.error(error.message || "Signup failed");
       } else {
-        alert("Check your email to confirm your account");
+        toast.warning("Check your email to confirm your account");
         navigate("/verify-email", { state: { email } });
       }
     } catch (err) {
       console.error(err);
-      alert("Signup failed");
+      toast.error("Signup failed");
     }
 
     reset();
   };
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 text-black border-b-black">
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 border-b-black">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           alt="Your Company"
@@ -63,7 +64,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="name"
-              className="block text-sm/6 font-medium text-gray-900"
+              className="block text-sm/6 font-medium"
             >
               Name
             </label>
@@ -92,7 +93,7 @@ const Register = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="email"
-                className="block text-sm/6 font-medium text-gray-900"
+                className="block text-sm/6 font-medium"
               >
                 Email
               </label>
@@ -122,7 +123,7 @@ const Register = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm/6 font-medium text-gray-900"
+                className="block text-sm/6 font-medium"
               >
                 Password
               </label>
@@ -152,7 +153,7 @@ const Register = () => {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="confirmpassword"
-                className="block text-sm/6 font-medium text-gray-900"
+                className="block text-sm/6 font-medium"
               >
                 Confirm Password
               </label>

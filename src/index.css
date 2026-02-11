@@ -10,4 +10,21 @@ button{
     background-color: oklch(51.1% 0.262 276.966) !important;
     color: #FFF;
 } */
+
+/* simple dark-mode variables (used as fallback and for non-tailwind styles) */
+.light {
+    --bg: #ffffff;
+    --text: #000000;
+}
+.dark {
+    --bg: #0b1220;
+    --text: #e6eef8;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 150ms linear, color 150ms linear;
+}
+
 @import 'tailwindcss'
