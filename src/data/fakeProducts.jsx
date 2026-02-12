@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../pages/ProductCard";
-import CategoryButton from "./CategoryButton";
+import CategoryButton from "../component/ui/CategoryButton";
 import ProductSkeleton from "../pages/ProductSkeleton";
 
 

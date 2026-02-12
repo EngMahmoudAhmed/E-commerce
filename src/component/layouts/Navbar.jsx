@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 import supabase from "../../lib/supabase";
-import { useTheme } from "../../context/ThemeContext";
+// import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../context/auth/AuthContext";
+import { useTheme } from "../../context/theme/ThemeContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,7 +33,8 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="bg shadow-xl p-3 px-5 relative">
+    <>
+      <header className="p-3 px-5 top-0 left-0 right-0 z-100 fixed backdrop-blur-sm shadow-xl">
       <div className="mx-auto flex h-16 w-full items-center gap-8 px-4 sm:px-6 lg:px-8">
         <Link to={user?"/home" : "/home"} className="block text-teal-600 dark:text-teal-300">
           <span className="sr-only">Home</span>
@@ -221,7 +223,11 @@ const Navbar = () => {
           </nav>
         </div>
       )}
-    </header>
+      </header>
+
+      {/* spacer to avoid content being covered by fixed navbar */}
+      <div className="h-16" />
+    </>
   );
 };
 

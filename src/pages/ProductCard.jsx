@@ -1,4 +1,17 @@
+import { useContext } from "react";
+import { CartContext } from "../context/cart/CartContext";
+import { ADD_TO_CART } from "../context/cart/CartActions";
+
 function ProductCard({ product }) {
+
+  const { state: cart, dispatch } = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    dispatch({ type: ADD_TO_CART, payload: product });
+    console.log(cart);
+    
+  };
+
   return (
     <div className=" hover:shadow-gray-700 rounded-2xl shadow-xl transition overflow-hidden">
       <img
@@ -22,9 +35,9 @@ function ProductCard({ product }) {
           <span className="font-bold">${product.price}</span>
           <span className="text-sm">⭐ {product.rating}</span>
         </div>
-        <div className="flex items-center"> 
+        <div className="flex items-center">
           <button
-            onClick={() => addToCart(product)}
+            onClick={() => handleAddToCart()}
             className="px-4 m-auto py-2 cursor-pointer bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-900 transition"
           >
             Add

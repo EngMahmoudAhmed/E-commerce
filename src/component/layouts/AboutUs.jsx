@@ -33,14 +33,14 @@ const features = [
 
 const AboutUs = () => {
   return (
-    <section className="bg-white py-16">
+    <section className="bg- py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             About Our Store
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-lg">
             We are an eCommerce platform dedicated to delivering quality,
             convenience, and trust to our customers.
           </p>
@@ -58,10 +58,10 @@ const AboutUs = () => {
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
                   <Icon className="h-6 w-6 text-indigo-600" />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-gray-900">
+                <h3 className="mt-4 text-lg font-semibold">
                   {feature.title}
                 </h3>
-                <p className="mt-2 text-sm text-gray-600">
+                <p className="mt-2 text-sm">
                   {feature.description}
                 </p>
               </div>
