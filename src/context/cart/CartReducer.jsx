@@ -9,19 +9,20 @@ export const CartReducer = (state, action) => {
     switch (action.type) {
 
         case ADD_TO_CART: {
-            const exitingItem = state.find(item => item.id === action.payload.id);
+            const existingItem = state.find(item => item.id === action.payload.id);
 
-            if (exitingItem) {
-                state.map(item =>
+            if (existingItem) {
+                return state.map(item =>
                     item.id === action.payload.id
-                        ? { ...state, quantity: item.quantity + 1 }
-                        : item)
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                );
             }
 
             return [
                 ...state,
                 { ...action.payload, quantity: 1 }
-            ]
+            ];
         }
 
         case REMOVE_FROM_CART:

@@ -1,15 +1,13 @@
 import { useContext } from "react";
 import { CartContext } from "../context/cart/CartContext";
-import { ADD_TO_CART } from "../context/cart/CartActions";
 
 function ProductCard({ product }) {
 
-  const { state: cart, dispatch } = useContext(CartContext);
+  const { addToCart, cart } = useContext(CartContext);
 
   const handleAddToCart = () => {
-    dispatch({ type: ADD_TO_CART, payload: product });
+    addToCart(product);
     console.log(cart);
-    
   };
 
   return (

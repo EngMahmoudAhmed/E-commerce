@@ -12,9 +12,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
   const { cart } = useContext(CartContext);
-  const cartCount = cart.reduce(
-    (acc, item) => acc + item.quntity, 0
-  )
+  const cartCount = cart.reduce((acc, item) => acc + (item.quantity || 0), 0);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
