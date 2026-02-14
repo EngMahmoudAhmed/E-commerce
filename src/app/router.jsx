@@ -8,6 +8,7 @@ import Products from "../data/fakeProducts.jsx";
 import AboutUs from "../component/layouts/AboutUs.jsx";
 import ProtectedRoute from "../routes/ProtectedRoute.jsx";
 import Cart from "../pages/Cart.jsx";
+import Checkout from "../pages/CheckOut.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,13 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/cart",
+        element: (
+          <ProtectedRoute>
+            <Cart /> ,
+          </ProtectedRoute>),
+      },
+      {
         path: "/aboutus",
         element: (
           <AboutUs />
@@ -41,7 +49,7 @@ export const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "verify-email", element: <VerifyEmail /> },
-      { path: "cart", element: <Cart /> },
+      { path: "checkout", element: <Checkout /> }
     ],
   },
   {

@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../hooks/useCart";
 
 const CartSummary = () => {
+
+  const navigate = useNavigate();
+
   const { cart = [], increaseQty, decreaseQty, removeFromCart } = useCart();
 
   const totalItems = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
@@ -60,7 +64,10 @@ const CartSummary = () => {
           <span className="font-semibold">{fmt(total)}</span>
         </div>
 
-        <button className="w-full bg-black text-white py-2 rounded disabled:opacity-50 cursor-pointer" disabled={cart.length === 0}>
+        <button
+          onClick={() => { navigate("/checkout") }}
+          className="w-full bg-black text-white py-2 rounded disabled:opacity-50 cursor-pointer"
+          disabled={cart.length === 0}>
           Proceed to Checkout
         </button>
       </div>

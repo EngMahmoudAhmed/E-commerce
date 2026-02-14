@@ -73,7 +73,7 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <button
                 onClick={toggleTheme}
-                className="mr-2 inline-flex items-center justify-center rounded-md p-2 bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200"
+                className="mr-2 cursor-pointer inline-flex items-center justify-center rounded-md p-2 bg-gray-200 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? ("🌙 "
@@ -87,22 +87,24 @@ const Navbar = () => {
                 )}
               </button>
 
-              <Link to="/cart">
-                Cart 🛒 ({cartCount})
-              </Link>
+              {user && (
+                <Link to="/cart">
+                  Cart 🛒 ({cartCount})
+                </Link>
+              )}
 
               {/* Show Login/Register only when user is NOT logged in */}
               {!user && (
                 <div className="hidden sm:flex sm:gap-4">
                   <Link
-                    className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                    className="cursor-pointer block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
                     to="/login"
                   >
                     Login
                   </Link>
 
                   <Link
-                    className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                    className="cursor-pointer hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
                     to="/register"
                   >
                     Register
@@ -118,7 +120,7 @@ const Navbar = () => {
                   </span>
                   <button
                     onClick={handleLogout}
-                    className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700"
+                    className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700 cursor-pointer"
                   >
                     Logout
                   </button>

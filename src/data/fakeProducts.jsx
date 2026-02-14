@@ -8,10 +8,12 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [loading, setLoading] = useState(true);
+  const URL = "https://dummyjson.com/products";
 
   // ONE useEffect (correct)
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
+    const controller = new AbortController();
+    fetch(URL,{signal:controller.signal})
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products);
@@ -20,6 +22,9 @@ function Products() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
+      return function(){
+        controller.abort();
+      }
   }, []);
 
   // Filter logic

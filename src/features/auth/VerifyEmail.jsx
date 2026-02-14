@@ -155,14 +155,14 @@ const VerifyEmail = () => {
           <button
             onClick={handleResendEmail}
             disabled={loading}
-            className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:opacity-50"
+            className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 disabled:opacity-50"
           >
             {loading ? "Sending..." : "Resend Verification Email"}
           </button>
 
           <button
             onClick={() => navigate("/login")}
-            className="flex w-full justify-center rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-300"
+            className="flex w-full justify-center rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-300 cursor-pointer"
           >
             Back to Login
           </button>

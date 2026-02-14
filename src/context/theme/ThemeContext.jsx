@@ -5,7 +5,12 @@ const ThemeContext = createContext(null);
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     try {
-      return localStorage.getItem("theme") || "light";
+      const saved = localStorage.getItem("theme");
+      if (saved) return saved;
+      if (typeof window !== "undefined" && window.matchMedia) {
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      return "light";
     } catch (e) {
       return "light";
     }

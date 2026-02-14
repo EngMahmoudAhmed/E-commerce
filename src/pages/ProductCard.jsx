@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { CartContext } from "../context/cart/CartContext";
+import { toast } from "react-toastify";
 
 function ProductCard({ product }) {
 
@@ -8,6 +9,7 @@ function ProductCard({ product }) {
   const handleAddToCart = () => {
     addToCart(product);
     console.log(cart);
+    toast.success("sucsess add product ")
   };
 
   return (
@@ -37,6 +39,7 @@ function ProductCard({ product }) {
           <button
             onClick={() => handleAddToCart()}
             className="px-4 m-auto py-2 cursor-pointer bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-900 transition"
+            
           >
             Add
           </button>
