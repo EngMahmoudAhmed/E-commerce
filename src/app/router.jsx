@@ -8,7 +8,7 @@ import Products from "../data/fakeProducts.jsx";
 import AboutUs from "../component/layouts/AboutUs.jsx";
 import ProtectedRoute from "../routes/ProtectedRoute.jsx";
 import Cart from "../pages/Cart.jsx";
-import Checkout from "../pages/CheckOut.jsx";
+import Checkout from "../pages/Checkout.jsx"
 
 export const router = createBrowserRouter([
   {
