@@ -20,14 +20,3 @@ function ProtectedRoute({ children }) {
 }
 
 export default ProtectedRoute;
-// import { Navigate } from "react-router-dom";
-
-// function ProtectedRoute({ children, user }) {
-//   if (!user) return <Navigate to="/login" />;
-
-//   if (!user.email_confirmed_at) {
-//     return <Navigate to="/verify-email" />;
-//   }
-
-//   return children;
-// }

@@ -17,7 +17,6 @@ function Products() {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.products);
-        console.log(data.products);
 
         setLoading(false);
       })
@@ -32,14 +31,6 @@ function Products() {
     selectedCategory === "all"
       ? products
       : products.filter((product) => product.category === selectedCategory);
-
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center">
-  //       <p className="text-lg font-medium">Loading products...</p>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-16">

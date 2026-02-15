@@ -1,8 +1,8 @@
-// import { rules } from "eslint-plugin-react-hooks";
 import supabase from "../../lib/supabase";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 const Register = () => {
   const {
     register,
@@ -18,24 +18,23 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    console.log("Register payload", { email, password });
 
     try {
       const { data: resData, error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          emailRedirectTo: "https://e-commerce-shopping-2.netlify.app/login",
+        },
       });
-      console.log("signUp result", resData, error);
 
       if (error) {
-        console.error(error);
         toast.error(error.message || "Signup failed");
       } else {
         toast.warning("Check your email to confirm your account");
         navigate("/verify-email", { state: { email } });
       }
     } catch (err) {
-      console.error(err);
       toast.error("Signup failed");
     }
 
@@ -105,7 +104,7 @@ const Register = () => {
                 type="email"
                 placeholder="Enter your Email"
                 {...register("email", {
-                  required: "email is required",
+                  required: "Email is required",
                   pattern: {
                     value: /^\S+@\S+$/i,
                     message: "Invalid email format",
@@ -165,9 +164,9 @@ const Register = () => {
                 type="password"
                 placeholder="Confirm Password"
                 {...register("confirmpassword", {
-                  required: "password is required",
+                  required: "Password is required",
                   validate: (value) =>
-                    value === password || "password don't match",
+                    value === password || "Password don't match",
                 })}
                 className="block w-full rounded-md bg-gray-800 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
               />

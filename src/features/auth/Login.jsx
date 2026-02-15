@@ -30,17 +30,16 @@ const Login = () => {
 
     if (!signedUser) {
       toast.success("Login succeeded but no user returned. Check console for details.");
-      console.log("signIn data", signInData);
       return;
     }
 
     if (!signedUser.email_confirmed_at) {
       toast.warn("Please confirm your email before logging in.");
-      navigate("/verify-email", { state: { email: signedUser.email } });
+      navigate("/verify-email");
       reset();
       return;
     }
-
+{ state: { email: signedUser.email } }
     setTimeout(() => {
       toast.success("Logged in successfully");
       navigate("/home");
@@ -140,12 +139,12 @@ const Login = () => {
 
         <p className="mt-10 text-center text-sm/6">
           Not a member?{" "}
-          <a
-            href="#"
-            className="font-semibold text-indigo-400 hover:text-indigo-300"
+          <button
+            onClick={() =>  navigate("/register") }
+            className="font-semibold text-indigo-400 hover:text-indigo-300 cursor-pointer"
           >
             Start a 14 day free trial
-          </a>
+          </button>
         </p>
       </div>
     </div>

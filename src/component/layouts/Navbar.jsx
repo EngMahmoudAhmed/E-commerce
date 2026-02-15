@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../../lib/supabase";
-// import Cart from "../../pages/Cart"
 import { useAuth } from "../../context/auth/AuthContext";
 import { useTheme } from "../../context/theme/ThemeContext";
 import { CartContext } from "../../context/cart/CartContext";
@@ -32,7 +31,6 @@ const Navbar = () => {
     { name: "Home", path: "/home" },
     { name: "AboutUs", path: "/aboutus" },
     { name: "Products", path: "/products" },
-    // { name: "Services", path: "/services" },
   ];
 
   return (
@@ -60,7 +58,6 @@ const Navbar = () => {
                 {navItems.map((item) => (
                   <li key={item.name}>
                     <Link
-                      // className="text-gray-500 transition hover:text-gray-500/75 dark:text-black dark:hover:text-white/75"
                       to={item.path}
                     >
                       {item.name}
@@ -76,15 +73,7 @@ const Navbar = () => {
                 className="mr-2 cursor-pointer inline-flex items-center justify-center rounded-md p-2 bg-gray-200 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200"
                 aria-label="Toggle theme"
               >
-                {theme === "dark" ? ("🌙 "
-                  // <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  //   <path d="M17.293 13.293A8 8 0 116.707 2.707a7 7 0 0010.586 10.586z" />
-                  // </svg>
-                ) : ("☀️"
-                  // <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  //   <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 2.22a1 1 0 011.415 0l.707.707a1 1 0 11-1.414 1.414l-.708-.707a1 1 0 010-1.414zM18 9a1 1 0 110 2h-1a1 1 0 110-2h1zM5.05 4.05a1 1 0 010 1.414L4.343 6.17A1 1 0 112.93 4.757l.707-.707a1 1 0 011.414 0zM4 10a1 1 0 110 2H3a1 1 0 110-2h1zm1.05 5.95a1 1 0 01-1.414 0l-.707-.707A1 1 0 114.343 12.83l.707.707a1 1 0 010 1.414zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm5 0a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" />
-                  // </svg>
-                )}
+                {theme === "dark" ? ("🌙" ) : ("☀️")}
               </button>
 
               {user && (

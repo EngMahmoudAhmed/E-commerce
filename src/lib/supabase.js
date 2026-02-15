@@ -9,8 +9,6 @@ if (!supabaseURL || !supabaseKEY) {
 }
 
 const supabase = createClient(supabaseURL, supabaseKEY);
-console.log("URL:", supabaseURL);
-console.log("KEY:", supabaseKEY?.slice(0, 10));
 
 
 export default supabase;

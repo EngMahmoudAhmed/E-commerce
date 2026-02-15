@@ -8,7 +8,6 @@ function ProductCard({ product }) {
 
   const handleAddToCart = () => {
     addToCart(product);
-    console.log(cart);
     toast.success("sucsess add product ")
   };
 
