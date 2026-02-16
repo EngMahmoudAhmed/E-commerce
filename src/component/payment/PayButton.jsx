@@ -21,7 +21,7 @@ export default function PayButton() {
         <button
             onClick={handlePay}
             disabled={state.loading}
-            className="w-full bg-indigo-600 text-white py-3 rounded-lg mt-6 disabled:opacity-50 cursor-pointer"
+            className="w-full bg-indigo-600 text-whit py-3 rounded-lg mt-6 disabled:opacity-50 cursor-pointer"
         >
             {state.loading ? "Processing..." : "Pay $120.00"}
         </button>

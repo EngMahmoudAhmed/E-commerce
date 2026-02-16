@@ -28,6 +28,11 @@ const Login = () => {
 
     const signedUser = signInData?.user ?? signInData?.session?.user;
 
+    if (data?.session) {
+      const token = data.session.access_token;
+      console.log(token);
+    }
+
     if (!signedUser) {
       toast.success("Login succeeded but no user returned. Check console for details.");
       return;
@@ -39,7 +44,7 @@ const Login = () => {
       reset();
       return;
     }
-{ state: { email: signedUser.email } }
+    // { state: { email: signedUser.email } }
     setTimeout(() => {
       toast.success("Logged in successfully");
       navigate("/home");
@@ -140,7 +145,7 @@ const Login = () => {
         <p className="mt-10 text-center text-sm/6">
           Not a member?{" "}
           <button
-            onClick={() =>  navigate("/register") }
+            onClick={() => navigate("/register")}
             className="font-semibold text-indigo-400 hover:text-indigo-300 cursor-pointer"
           >
             Start a 14 day free trial
