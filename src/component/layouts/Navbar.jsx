@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="mx-auto flex h-16 w-full items-center gap-8 px-4 sm:px-6 lg:px-8">
           <Link to={user ? "/home" : "/home"} className="block text-teal-600 dark:text-teal-300">
             <span className="sr-only">Home</span>
-            <img src="../../../public/download.png" alt="logo.img" width={50} className="rounded-2xl" />
+            <img src="./download.png" alt="logo.img" width={50} className="rounded-2xl" />
           </Link>
 
           <div className="flex flex-1 items-center justify-end md:justify-between">

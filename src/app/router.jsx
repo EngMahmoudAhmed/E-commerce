@@ -28,17 +28,18 @@ export const router = createBrowserRouter([
       {
         path: "/products",
         element: (
-          <ProtectedRoute>
-            <Products />
-          </ProtectedRoute>
+          // <ProtectedRoute>
+          <Products />
+          // </ProtectedRoute>
         ),
       },
       {
         path: "/cart",
         element: (
-          <ProtectedRoute>
-            <Cart /> ,
-          </ProtectedRoute>),
+          // <ProtectedRoute>
+          <Cart />
+          // </ProtectedRoute>
+        ),
       },
       {
         path: "/aboutus",
