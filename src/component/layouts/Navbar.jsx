@@ -66,7 +66,7 @@ const Navbar = () => {
                 {theme === "dark" ? ("🌙" ) : ("☀️")}
               </button>
 
-              {user && (
+              {user || !user &&(
                 <Link to="/cart">
                   Cart 🛒 ({cartCount})
                 </Link>
