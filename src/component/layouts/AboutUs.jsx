@@ -1,4 +1,5 @@
 import { ShoppingBag, Truck, ShieldCheck, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -31,6 +32,15 @@ const features = [
   },
 ];
 
+const fadeIn = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.15 * i, duration: 0.7, ease: "easeOut" },
+  }),
+};
+
 const AboutUs = () => {
   return (
     <section className="bg- py-16">
@@ -47,12 +57,18 @@ const AboutUs = () => {
         </div>
 
         {/* Features */}
-        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => {
+        <div className="mt-16 grid grid-cols-1 cursor-pointer gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div
-                key={feature.id}
+              <motion.div
+                key={index}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                variants={fadeIn}
+                viewport={{ once: true, amount: 0.5 }}
+                whileHover={{ scale: 1.05, backgroundColor: "#ccc" }}
                 className="rounded-2xl border border-gray-200 p-6 text-center shadow-sm transition hover:shadow-md"
               >
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
@@ -64,7 +80,7 @@ const AboutUs = () => {
                 <p className="mt-2 text-sm">
                   {feature.description}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
         </div>

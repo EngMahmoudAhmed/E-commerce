@@ -58,7 +58,7 @@ const Home = () => {
                 <motion.button
                   whileHover={{ scale: 1.07 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold border border-white/30 bg-white/10 hover:bg-white/20 text-white shadow-lg"
+                  className="inline-flex cursor-pointer items-center gap-2 rounded-xl px-6 py-3 font-semibold border border-white/30 bg-white/10 hover:bg-white/20 text-white shadow-lg"
                 >
                   Shop Now <ShoppingCart className="h-5 w-5" />
                 </motion.button>
@@ -67,7 +67,7 @@ const Home = () => {
                 <motion.button
                   whileHover={{ scale: 1.07 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-3 bg-white/10 hover:bg-white/20 text-white shadow-lg"
+                  className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/30 px-6 py-3 bg-white/10 hover:bg-white/20 text-white shadow-lg"
                 >
                   Explore <ArrowRight className="h-5 w-5" />
                 </motion.button>
@@ -98,6 +98,7 @@ const Home = () => {
               custom={index}
               initial="hidden"
               whileInView="visible"
+              whileHover={{ scale: 1.05, backgroundColor: "#0B1230" }}
               viewport={{ once: true, amount: 0.5 }}
               variants={fadeIn}
               className="rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition bg-white dark:bg-gray-900"
@@ -122,7 +123,7 @@ const Home = () => {
             {categories.map((cat, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.05, backgroundColor: "#ede9fe" }}
+                whileHover={{ scale: 1.05, backgroundColor: "#0B1230" }}
                 className="flex h-40 items-center justify-center rounded-2xl font-semibold shadow-sm hover:shadow-md transition cursor-pointer bg-white dark:bg-gray-900 text-indigo-700 dark:text-indigo-300 text-xl"
               >
                 {cat}
@@ -156,7 +157,7 @@ const Home = () => {
           <motion.button
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.97 }}
-            className="mt-8 rounded-xl bg-indigo-600 px-8 py-3 font-semibold text-white hover:bg-indigo-700 shadow-lg"
+            className="mt-8 rounded-xl cursor-pointer bg-indigo-600 px-8 py-3 font-semibold text-white hover:bg-indigo-700 shadow-lg"
           >
             Browse Products
           </motion.button>
