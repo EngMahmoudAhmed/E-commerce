@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { ShoppingCart, Truck, ShieldCheck, BadgeCheck, ArrowRight, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { easeIn, easeInOut, easeOut, motion } from "framer-motion";
 
 const features = [
   {
@@ -98,16 +98,16 @@ const Home = () => {
               custom={index}
               initial="hidden"
               whileInView="visible"
-              whileHover={{ scale: 1.05, backgroundColor: "#0B1230" }}
+              whileHover={{ scale: 1.05, backgroundColor: "#ccc", color: "#000" }}
               viewport={{ once: true, amount: 0.5 }}
               variants={fadeIn}
-              className="rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition bg-white dark:bg-gray-900"
+              className="rounded-2xl cursor-pointer border border-gray-200 p-6 text-center shadow-sm hover:shadow-md transition"
             >
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
                 {item.icon}
               </div>
-              <h3 className="text-lg font-semibold text-amber-50">{item.title}</h3>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{item.desc}</p>
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="mt-2 text-sm">{item.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -116,15 +116,25 @@ const Home = () => {
       {/* Categories */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4">
-          <h2 className="mb-8 text-center text-3xl font-bold">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true, amount: 0.5 }}
+
+            className="mb-8 text-center text-3xl font-bold">
             Shop by Category
-          </h2>
+          </motion.h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((cat, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.05, backgroundColor: "#0B1230" }}
-                className="flex h-40 items-center justify-center rounded-2xl font-semibold shadow-sm hover:shadow-md transition cursor-pointer bg-white dark:bg-gray-900 text-indigo-700 dark:text-indigo-300 text-xl"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                whileHover={{ scale: 1.05, backgroundColor: "#ccc", color: "#000" }}
+                viewport={{ once: true, amount: 0.5 }}
+                className="flex h-40 border border-gray-200 items-center justify-center rounded-2xl font-semibold shadow-sm hover:shadow-md transition cursor-pointer text-xl"
               >
                 {cat}
               </motion.div>

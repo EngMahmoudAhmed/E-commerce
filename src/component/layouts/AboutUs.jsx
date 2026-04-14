@@ -68,7 +68,7 @@ const AboutUs = () => {
                 whileInView="visible"
                 variants={fadeIn}
                 viewport={{ once: true, amount: 0.5 }}
-                whileHover={{ scale: 1.05, backgroundColor: "#ccc" }}
+                whileHover={{ scale: 1.05, backgroundColor: "#ccc", color:'#000' }}
                 className="rounded-2xl border border-gray-200 p-6 text-center shadow-sm transition hover:shadow-md"
               >
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
