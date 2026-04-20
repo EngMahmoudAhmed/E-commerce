@@ -17,9 +17,9 @@ const CartSummary = () => {
 
   if (!cart || cart.length === 0) {
     return (
-      <div className="bg-white shadow rounded p-6 text-center">
-        <h3 className="text-xl font-semibold mb-2">Your cart is empty</h3>
-        <p className="text-sm text-gray-500">Add products to see them here.</p>
+      <div className="shadow border rounded-2xl p-6 text-center">
+        <h3 className="text-xl font-semibold mb-2">Your Cart is Empty</h3>
+        <p className="text-sm">Add products to see them here.</p>
       </div>
     );
   }
@@ -48,10 +48,10 @@ const CartSummary = () => {
               </div>
 
               <div className="mt-2 flex items-center gap-2">
-                <button onClick={() => decreaseQty(item.id)} className="px-2 py-1 rounded cursor-pointer">-</button>
+                <button onClick={() => decreaseQty(item.id)} className="px-2 font-bold border rounded py-1  cursor-pointer">-</button>
                 <div className="w-8 text-center">{item.quantity || 1}</div>
-                <button onClick={() => increaseQty(item.id)} className="px-2 py-1 rounded cursor-pointer">+</button>
-                <button onClick={() => removeFromCart(item.id)} className="ml-3 text-xs text-red-600 cursor-pointer">Remove</button>
+                <button onClick={() => increaseQty(item.id)} className="px-2 py-1 font-bold border rounded cursor-pointer">+</button>
+                <button onClick={() => removeFromCart(item.id)} className="ml-3  text-1xl text-red-600 cursor-pointer">Remove</button>
               </div>
             </div>
           </div>

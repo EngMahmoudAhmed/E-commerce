@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../context/cart/CartContext";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 function ProductCard({ product }) {
 
@@ -10,9 +11,13 @@ function ProductCard({ product }) {
     addToCart(product);
     toast.success("sucsess add product ")
   };
-
+  motion
   return (
-    <div className=" hover:shadow-gray-700 rounded-2xl shadow-xl transition overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, delay: 0.3 }}
+      className=" hover:shadow-gray-700 rounded-2xl shadow-xl transition overflow-hidden">
       <img
         src={product.thumbnail}
         alt={product.title}
@@ -38,13 +43,13 @@ function ProductCard({ product }) {
           <button
             onClick={() => handleAddToCart()}
             className="px-4 m-auto py-2 cursor-pointer bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-900 transition"
-            
+
           >
             Add
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

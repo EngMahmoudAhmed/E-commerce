@@ -9,7 +9,7 @@ const Cart = () => {
 
     return (
         <div className="p-6">
-            <h2 className="text-2xl mb-6">Your Cart</h2>
+            <h2 className="text-2xl text-center pt-10 mb-6">Your Cart</h2>
 
             <div className="lg:flex lg:items-center lg:justify-center lg:gap-6">
 
