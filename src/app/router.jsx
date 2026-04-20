@@ -20,13 +20,13 @@ export const router = createBrowserRouter([
         element: <Navigate to="/home" replace />,
       },
       {
-        path: "/home",
+        path: "home",
         element: (
           <Home />
         ),
       },
       {
-        path: "/products",
+        path: "products",
         element: (
           // <ProtectedRoute>
           <Products />
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/cart",
+        path: "cart",
         element: (
           // <ProtectedRoute>
           <Cart />
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/aboutus",
+        path: "aboutus",
         element: (
           <AboutUs />
         ),
