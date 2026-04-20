@@ -7,14 +7,14 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-900 text-gray-300 shadow-2xl">
+    <footer className="shadow-2xl shadow-gray-500">
       <div className="max-w-7xl mx-auto px-6 py-14">
         {/* Top */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <h2 className="text-2xl font-bold text-white">MyApp</h2>
-            <p className="mt-4 text-sm text-gray-400">
+            <h2 className="text-2xl font-bold">MyApp</h2>
+            <p className="mt-4 text-sm">
               Building modern web applications with React and Tailwind CSS.
             </p>
             <div className="social-icons flex gap-4 mt-4">
@@ -64,8 +64,8 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} MyApp. All rights reserved.</p>
 
           <div className="flex gap-6 mt-4 md:mt-0">
-            <span className="hover:text-white cursor-pointer">Privacy</span>
-            <span className="hover:text-white cursor-pointer">Terms</span>
+            <span className="cursor-pointer">Privacy</span>
+            <span className="cursor-pointer">Terms</span>
           </div>
         </div>
       </div>
@@ -76,10 +76,10 @@ export default function Footer() {
 function FooterColumn({ title, items }) {
   return (
     <div>
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
+      <h3 className="text-lg font-semibold">{title}</h3>
       <ul className="mt-4 space-y-3 text-sm">
         {items.map((item) => (
-          <li key={item} className="hover:text-white cursor-pointer transition">
+          <li key={item} className="cursor-pointer transition">
             {item}
           </li>
         ))}
@@ -90,7 +90,7 @@ function FooterColumn({ title, items }) {
 
 function IconWrapper({ children }) {
   return (
-    <div className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 text-white cursor-pointer transition">
+    <div className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 cursor-pointer transition">
       {children}
     </div>
   );

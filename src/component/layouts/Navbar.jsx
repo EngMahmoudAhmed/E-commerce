@@ -60,13 +60,13 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <button
                 onClick={toggleTheme}
-                className="mr-2 cursor-pointer inline-flex items-center justify-center rounded-md p-2 bg-gray-200 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200"
+                className="mr-2 cursor-pointer inline-flex items-center justify-center rounded-md p-2 bg-gray-200 text-gray-700 hover:bg-gray-200 dark:bg-gray-800"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? ("🌙" ) : ("☀️")}
               </button>
 
-              {user || !user &&(
+              {user &&(
                 <Link to="/cart">
                   Cart 🛒 ({cartCount})
                 </Link>
@@ -76,14 +76,14 @@ const Navbar = () => {
               {!user && (
                 <div className="hidden sm:flex sm:gap-4">
                   <Link
-                    className="cursor-pointer block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                    // className="cursor-pointer block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
                     to="/login"
                   >
                     Login
                   </Link>
 
                   <Link
-                    className="cursor-pointer hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                    // className="cursor-pointer hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
                     to="/register"
                   >
                     Register
@@ -94,7 +94,7 @@ const Navbar = () => {
               {/* Show User Info and Logout when user IS logged in */}
               {user && (
                 <div className="hidden sm:flex sm:items-center sm:gap-4">
-                  <span className="text-sm text-gray-600 dark:text-gray-300">
+                  <span className="text-sm">
                     {user.email}
                   </span>
                   <button
@@ -150,7 +150,7 @@ const Navbar = () => {
 
         {/* Mobile Dropdown Menu */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-gray-900 shadow-lg border-t border-gray-200 z-50">
+          <div className="md:hidden absolute top-full left-0 right-0 shadow-lg border-t bg-gray-400 border-gray-200 z-50">
             <nav aria-label="Mobile navigation" className="px-4 py-4">
               <ul className="space-y-2">
                 {navItems.map((item) => (
@@ -158,7 +158,7 @@ const Navbar = () => {
                     <Link
                       to={item.path}
                       onClick={closeMenu}
-                      className="block px-4 py-3 rounded-md hover:bg-gray-100 transition"
+                      className="block px-4 cursor-pointer py-3 rounded-md hover:bg-gray-100 transition"
                     >
                       {item.name}
                     </Link>
@@ -172,7 +172,7 @@ const Navbar = () => {
                       <Link
                         to="/login"
                         onClick={closeMenu}
-                        className="block px-4 py-3 rounded-md bg-teal-600 text-white text-center hover:bg-teal-700 transition"
+                        className="block px-4 py-3 rounded-md bg-teal-600 text-center hover:bg-teal-700 transition"
                       >
                         Login
                       </Link>
@@ -181,7 +181,7 @@ const Navbar = () => {
                       <Link
                         to="/register"
                         onClick={closeMenu}
-                        className="block px-4 py-3 rounded-md bg-gray-100 text-teal-600 text-center hover:bg-gray-200 transition"
+                        className="block cursor-pointer px-4 py-3 rounded-md text-center  transition"
                       >
                         Register
                       </Link>
@@ -193,14 +193,14 @@ const Navbar = () => {
                 {user && (
                   <>
                     <li className="border-t border-gray-200 pt-2 mt-2">
-                      <div className="px-4 py-3 text-sm text-gray-600">
+                      <div className="px-4 py-3 text-sm">
                         {user.email}
                       </div>
                     </li>
                     <li>
                       <button
                         onClick={handleLogout}
-                        className="w-full block px-4 py-3 rounded-md bg-red-600 text-white text-center hover:bg-red-700 transition"
+                        className="w-full block px-4 py-3 rounded-md bg-red-600 text-center hover:bg-red-700 transition"
                       >
                         Logout
                       </button>

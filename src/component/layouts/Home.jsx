@@ -101,7 +101,7 @@ const Home = () => {
               whileHover={{ scale: 1.05, backgroundColor: "#ccc", color: "#000" }}
               viewport={{ once: true, amount: 0.5 }}
               variants={fadeIn}
-              className="rounded-2xl cursor-pointer border border-gray-200 p-6 text-center shadow-sm hover:shadow-md transition"
+              className="rounded-2xl cursor-pointer border p-6 text-center shadow-sm hover:shadow-md transition"
             >
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
                 {item.icon}
@@ -134,7 +134,7 @@ const Home = () => {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 whileHover={{ scale: 1.05, backgroundColor: "#ccc", color: "#000" }}
                 viewport={{ once: true, amount: 0.5 }}
-                className="flex h-40 border border-gray-200 items-center justify-center rounded-2xl font-semibold shadow-sm hover:shadow-md transition cursor-pointer text-xl"
+                className="flex h-40 border items-center justify-center rounded-2xl font-semibold shadow-sm hover:shadow-md transition cursor-pointer text-xl"
               >
                 {cat}
               </motion.div>
