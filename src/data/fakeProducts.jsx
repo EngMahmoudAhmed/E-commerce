@@ -1,36 +1,23 @@
 import { useEffect, useState } from "react";
+import { useProducts } from "../hooks/useProducts";
 import ProductCard from "../pages/ProductCard";
 import CategoryButton from "../component/ui/CategoryButton";
 import ProductSkeleton from "../pages/ProductSkeleton";
 
 
 function Products() {
+  const { data, isLoading, } = useProducts();
+
+  console.log(data);
+
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [loading, setLoading] = useState(true);
-  const URL = "https://dummyjson.com/products";
-
-  // ONE useEffect (correct)
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch(URL,{signal:controller.signal})
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data.products);
-
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-      return function(){
-        controller.abort();
-      }
-  }, []);
 
   // Filter logic
   const filteredProducts =
     selectedCategory === "all"
-      ? products
-      : products.filter((product) => product.category === selectedCategory);
+      ? data
+      : data?.filter((product) => product?.category === selectedCategory);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-16">
@@ -57,13 +44,15 @@ function Products() {
 
       {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-         {loading
+        {isLoading
           ? Array.from({ length: 10 }).map((_, i) => (
             <ProductSkeleton key={i} />
           )) :
-          filteredProducts.map(product=> 
-          <ProductCard key={product.id} product={product} />
-        )}
+          filteredProducts.map(product =>
+            <ProductCard key={product.id} product={product} />
+          )
+
+        }
       </div>
     </div>
   );

@@ -4,14 +4,20 @@ import AuthProvider from "../context/auth/AuthContext";
 import ThemeProvider, { useTheme } from "../context/theme/ThemeContext";
 import { CartProvider } from "../context/cart/CartContext";
 import { PaymentProvider } from "../context/payment/PaymentContext";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 export const Providers = ({ children }) => {
+
+  const querClient = new QueryClient();
+
   return (
     <ThemeProvider>
       <AuthProvider>
         <CartProvider>
           <PaymentProvider>
             <ToastWithTheme />
-            {children}
+            <QueryClientProvider client={querClient}>
+              {children}
+            </QueryClientProvider>
           </PaymentProvider>
         </CartProvider>
       </AuthProvider>

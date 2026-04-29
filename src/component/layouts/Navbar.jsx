@@ -31,6 +31,7 @@ const Navbar = () => {
     { name: "Home", path: "/home" },
     { name: "AboutUs", path: "/aboutus" },
     { name: "Products", path: "/products" },
+    { name: "Dashboard", path: "/dashboard" },
   ];
 
   return (
@@ -60,7 +61,7 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <button
                 onClick={toggleTheme}
-                className="mr-2 cursor-pointer inline-flex items-center justify-center rounded-md p-2 bg-gray-200 text-gray-700 hover:bg-gray-200 dark:bg-gray-800"
+                className="mr-2 cursor-pointer inline-flex items-center justify-center rounded-md p-2 hover:bg-gray-500 dark:bg-gra"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? ("🌙" ) : ("☀️")}
@@ -99,7 +100,7 @@ const Navbar = () => {
                   </span>
                   <button
                     onClick={handleLogout}
-                    className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700 cursor-pointer"
+                    className="block cursor-pointer rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700"
                   >
                     Logout
                   </button>
@@ -172,7 +173,7 @@ const Navbar = () => {
                       <Link
                         to="/login"
                         onClick={closeMenu}
-                        className="block px-4 py-3 rounded-md bg-teal-600 text-center hover:bg-teal-700 transition"
+                        className="block cursor-pointer px-4 py-3 rounded-md bg-teal-600 text-center hover:bg-teal-700 transition"
                       >
                         Login
                       </Link>

@@ -9,6 +9,7 @@ import AboutUs from "../component/layouts/AboutUs.jsx";
 import ProtectedRoute from "../routes/ProtectedRoute.jsx";
 import Cart from "../pages/Cart.jsx";
 import Checkout from "../pages/Checkout.jsx"
+import Dashboard from "../pages/Dashboard.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
           <Products />
           // </ProtectedRoute>
         ),
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard />
       },
       {
         path: "cart",

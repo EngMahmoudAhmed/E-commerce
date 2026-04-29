@@ -11,7 +11,7 @@ function ProductCard({ product }) {
     addToCart(product);
     toast.success("sucsess add product ")
   };
-  motion
+  
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -19,7 +19,7 @@ function ProductCard({ product }) {
       transition={{ duration: 1, delay: 0.3 }}
       className=" hover:shadow-gray-700 rounded-2xl shadow-xl transition overflow-hidden">
       <img
-        src={product.thumbnail}
+        src={product.image}
         alt={product.title}
         className="h-48 w-full object-cover"
       />
