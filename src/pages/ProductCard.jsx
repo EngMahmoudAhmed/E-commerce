@@ -11,12 +11,12 @@ function ProductCard({ product }) {
     addToCart(product);
     toast.success("sucsess add product ")
   };
-  
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1, delay: 0.3 }}
+      transition={{ duration: 1, delay: 0.5 }}
       className=" hover:shadow-gray-700 rounded-2xl shadow-xl transition overflow-hidden">
       <img
         src={product.image}

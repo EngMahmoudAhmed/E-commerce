@@ -10,7 +10,7 @@ function Products() {
 
   console.log(data);
 
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   // Filter logic

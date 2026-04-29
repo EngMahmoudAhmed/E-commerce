@@ -1,19 +1,59 @@
+import { useState } from "react";
+import ProductForm from "../component/layouts/ProductForm";
+import ProductTable from "../component/layouts/ProductTable";
 import { useAdminProducts } from "../hooks/useAdminProducts";
+import { useUpdateProduct } from "../hooks/useUpdateProduct"
+import { useDeleteProduct } from "../hooks/useDeleteProduct";
+import { useAddProduct } from "../hooks/useAddProduct"
 import { motion } from "framer-motion";
 import ProductSkeleton from "./ProductSkeleton";
-// import { useDeleteProduct } from "../hooks/useDeleteProduct";
 
 
 const Dashboard = () => {
-    const { data, isLoading, isError, error } = useAdminProducts();
-    // const {mutate:deleteProduct} = useDeleteProduct();
+    const { data:products, isLoading, isError, error } = useAdminProducts();
+    const deleteMutation = useDeleteProduct();
+    const updateMutation = useUpdateProduct();
+    const addMutation = useAddProduct();
 
-    if (isError)
-        throw { error }
+    const [editingProduct, setEditingProduct] = useState(null)
+
+    const handleAdd = (data) => {
+        addMutation.mutate(data);
+    };
+
+    const handleUpdate = (data) => {
+        updateMutation.mutate({
+            id: editingProduct.id,
+            updatedData: data,
+        })
+        setEditingProduct(null)
+    }
+
+    const handleDelete = (id) => {
+        deleteMutation.mutate(id)
+    }
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-              {
+        <>
+            <h1 className="text-4xl text-center font-bold m-auto mb-10 p-buttom border-b-blue-700 py-16">
+                Dashboard
+            </h1>
+
+
+            <ProductForm
+                onSubmit={editingProduct ? handleUpdate : handleAdd}
+                defaultValues={editingProduct || {}}
+                isEdit={!!editingProduct}
+            />
+
+            <ProductTable
+                products={products}
+                onEdit={setEditingProduct}
+                onDelete={handleDelete}
+            />
+
+            {/* <div className="grid max-w-7xl mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 py-10">
+                {
                     isLoading
                         ? Array.from({ length: 10 }).map((_, i) => (
                             <ProductSkeleton key={i} />
@@ -60,7 +100,8 @@ const Dashboard = () => {
                             </div>
                         ))
                 }
-        </div >
+            </div > */}
+        </>
     )
 
 }
