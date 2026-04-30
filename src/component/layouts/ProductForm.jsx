@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 
 const ProductForm = ({ onSubmit, defaultValues = {}, isEdit }) => {
-    const { handleSubmit, register, reset } = useForm({ defaultValues });
+    const { handleSubmit, register, reset, formState: { errors } } = useForm({ defaultValues });
 
     const submitHandler = (data) => {
         onSubmit(data);
@@ -25,23 +25,61 @@ const ProductForm = ({ onSubmit, defaultValues = {}, isEdit }) => {
                     </label>
                     <input
                         type="text"
-                        {...register("title")}
+                        {...register("title", { required: "title is required" })}
                         placeholder="Enter product title"
                         className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
                     />
+                    <p className="text-red-500 text-sm mt-1">
+                        {errors.title?.message}
+                    </p>
+                </div>
+
+                {/* Category */}
+                <div>
+                    <label className="block text-sm font-medium mb-1">
+                        Product Category
+                    </label>
+                    <input
+                        type="text"
+                        {...register("category", { required: "Product Category is required" })}
+                        placeholder="Enter product category"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    />
+                    <p className="text-red-500 text-sm mt-1">
+                        {errors.category?.message}
+                    </p>
                 </div>
 
                 {/* Price */}
                 <div>
                     <label className="block text-sm font-medium mb-1">
-                        Price
+                        Product Price
                     </label>
                     <input
                         type="number"
-                        {...register("price")}
+                        {...register("price", { required: "Price is required" })}
                         placeholder="Enter price"
                         className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
                     />
+                    <p className="text-red-500 text-sm mt-1">
+                        {errors.price?.message}
+                    </p>
+                </div>
+
+                {/* Description */}
+                <div>
+                    <label className="block text-sm font-medium mb-1">
+                        Product Description
+                    </label>
+                    <input
+                        type="text"
+                        {...register("description", { required: "description is required" })}
+                        placeholder="Enter description"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    />
+                    <p className="text-red-500 text-sm mt-1">
+                        {errors.description?.message}
+                    </p>
                 </div>
 
                 {/* Image */}
@@ -52,6 +90,18 @@ const ProductForm = ({ onSubmit, defaultValues = {}, isEdit }) => {
                     <input
                         {...register("image")}
                         placeholder="https://example.com/image.jpg"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    />
+                </div>
+
+                {/* rating */}
+                <div>
+                    <label className="block text-sm font-medium mb-1">
+                        rating
+                    </label>
+                    <input
+                        {...register("rating")}
+                        placeholder="3/5"
                         className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
                     />
                 </div>

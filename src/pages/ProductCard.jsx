@@ -42,10 +42,10 @@ function ProductCard({ product }) {
         <div className="flex items-center">
           <button
             onClick={() => handleAddToCart()}
+            // disabled={addToCart.isPending}
             className="px-4 m-auto py-2 cursor-pointer bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-900 transition"
-
           >
-            Add
+            {addToCart.isPending ? "Saving..." : "Add"}
           </button>
         </div>
       </div>

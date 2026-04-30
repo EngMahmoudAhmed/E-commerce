@@ -36,13 +36,15 @@ const VerifyEmail = () => {
       setTimeout(() => {
         supabase.auth.getSession().then(({ data }) => {
           if (data.session?.user?.email_confirmed_at) {
-            toast.success(setMessage("Email verified successfully! Redirecting..."));
+            setMessage("Email verified successfully! Redirecting...");
+            toast.success("Email verified successfully!");
             setTimeout(() => {
               navigate("/login", { replace: true });
             }, 1500);
           } else {
             setCheckingEmail(false);
-            toast.warn(setMessage("Email verification link may have expired. Please try resending."));
+            setMessage("Email verification link may have expired. Please try resending.");
+            toast.warn("Email verification link may have expired. Please try resending.");
           }
         });
       }, 1000);
@@ -68,12 +70,16 @@ const VerifyEmail = () => {
       });
 
       if (error) {
-       toast.error(setMessage(`Error: ${error.message}`));
+        setMessage(`Error: ${error.message}`);
+        toast.error(`Error: ${error.message}`);
       } else {
-        toast.warning(setMessage("Verification email sent! Please check your inbox (and spam folder)."));
+        setMessage("Verification email sent! Please check your inbox (and spam folder).");
+        toast.success("Verification email sent! Please check your inbox (and spam folder).");
       }
     } catch (err) {
-      toast.error(setMessage(`Error: ${err.message || "Failed to send verification email"}`));
+      const errorMsg = err.message || "Failed to send verification email";
+      setMessage(`Error: ${errorMsg}`);
+      toast.error(`Error: ${errorMsg}`);
     } finally {
       setLoading(false);
     }
@@ -141,10 +147,10 @@ const VerifyEmail = () => {
         {message && (
           <div
             className={`mt-4 rounded-md p-4 ${message.startsWith("Error") || message.includes("expired")
-                ? "bg-red-50 text-red-800"
-                : message.includes("successfully")
-                  ? "bg-green-50 text-green-800"
-                  : "bg-blue-50 text-blue-800"
+              ? "bg-red-50 text-red-800"
+              : message.includes("successfully")
+                ? "bg-green-50 text-green-800"
+                : "bg-blue-50 text-blue-800"
               }`}
           >
             <p className="text-sm">{message}</p>
