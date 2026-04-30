@@ -54,7 +54,7 @@ export function useAuth() {
   useEffect(() => {
     // Initial load
     supabase.auth.getSession().then(({ data }) => {
-      setUser(data.session?.user ?? null);
+      setUser(data?.session?.user ?? null);
       setLoading(false);
     });
 
