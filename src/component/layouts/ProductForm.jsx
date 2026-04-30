@@ -9,8 +9,8 @@ const ProductForm = ({ onSubmit, defaultValues = {}, isEdit }) => {
     };
 
     return (
-        <div className="bg-white shadow-lg rounded-2xl p-6 max-w-xl mx-auto border">
-            <h2 className="text-xl font-semibold mb-6 text-gray-800">
+        <div className="bg-whit shadow-lg rounded-2xl p-6 max-w-xl mx-auto border">
+            <h2 className="text-xl font-semibold mb-6">
                 {isEdit ? "Update Product" : "Add New Product"}
             </h2>
 
@@ -20,7 +20,7 @@ const ProductForm = ({ onSubmit, defaultValues = {}, isEdit }) => {
             >
                 {/* Title */}
                 <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-1">
+                    <label className="block text-sm font-medium mb-1">
                         Product Title
                     </label>
                     <input
@@ -33,7 +33,7 @@ const ProductForm = ({ onSubmit, defaultValues = {}, isEdit }) => {
 
                 {/* Price */}
                 <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-1">
+                    <label className="block text-sm font-medium mb-1">
                         Price
                     </label>
                     <input
@@ -46,7 +46,7 @@ const ProductForm = ({ onSubmit, defaultValues = {}, isEdit }) => {
 
                 {/* Image */}
                 <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-1">
+                    <label className="block text-sm font-medium mb-1">
                         Image URL
                     </label>
                     <input
@@ -63,7 +63,7 @@ const ProductForm = ({ onSubmit, defaultValues = {}, isEdit }) => {
                         {...register("is_published")}
                         className="w-4 h-4 accent-rose-600 cursor-pointer"
                     />
-                    <label className="text-sm text-gray-700">
+                    <label className="text-sm">
                         Published
                     </label>
                 </div>
@@ -71,7 +71,7 @@ const ProductForm = ({ onSubmit, defaultValues = {}, isEdit }) => {
                 {/* Button */}
                 <button
                     type="submit"
-                    className="w-full py-2 rounded-lg bg-rose-600 text-white font-medium hover:bg-rose-700 transition duration-200"
+                    className="w-full py-2 cursor-pointer rounded-lg bg-rose-600 text-white font-medium hover:bg-rose-700 transition duration-200"
                 >
                     {isEdit ? "Update Product" : "Add Product"}
                 </button>

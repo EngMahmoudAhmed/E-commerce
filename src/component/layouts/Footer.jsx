@@ -7,7 +7,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="shadow-2xl shadow-gray-500 transition mx-10">
+    <footer className="shadow-2xl shadow-gray-500 transition mx-10 my-10">
       <div className="max-w-7xl mx-auto px-6 py-14">
         {/* Top */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">

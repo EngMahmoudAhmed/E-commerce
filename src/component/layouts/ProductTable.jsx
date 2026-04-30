@@ -1,16 +1,19 @@
+import { useAdminProducts } from "../../hooks/useAdminProducts"
+import ProductSkeleton from "../../pages/ProductSkeleton"
 import { motion } from "framer-motion"
 
 
 const ProductTable = ({ products, onDelete, onEdit }) => {
+    const {data, isLoading} = useAdminProducts()
     return (
         <>
             <div className="grid max-w-7xl mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 py-10">
                 {
-                    // isLoading
-                    //     ? Array.from({ length: 10 }).map((_, i) => (
-                    //         <ProductSkeleton key={i} />
-                    //     )) :
-                    products?.map((product) => (
+                    isLoading
+                        ? Array.from({ length: 10 }).map((_, i) => (
+                            <ProductSkeleton key={i} />
+                        )) :
+                    products.map((product) => (
                         <div className="max-w-7xl mx-auto overflow-auto" key={product.id}>
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.9 }}

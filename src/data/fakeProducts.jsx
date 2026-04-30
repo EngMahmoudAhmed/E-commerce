@@ -8,7 +8,7 @@ import ProductSkeleton from "../pages/ProductSkeleton";
 function Products() {
   const { data, isLoading, } = useProducts();
 
-  console.log(data);
+  // console.log(data);
 
   // const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");

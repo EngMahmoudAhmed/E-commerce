@@ -1,6 +1,6 @@
 // hooks/useAddProduct.js
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addProduct } from '../api/products';
+import { addProduct } from '../api/Products';
 
 export const useAddProduct = () => {
     const queryClient = useQueryClient();
