@@ -1,9 +1,15 @@
+// import { useQueryClient } from "@tanstack/react-query";
 import supabase from "../../lib/supabase";
+import { useGoogleAuth } from "../../hooks/useGoogleAuth";
+import { useRegister } from "../../hooks/useRegister";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Register = () => {
+
+
   const {
     register,
     handleSubmit,
@@ -12,34 +18,147 @@ const Register = () => {
     watch,
   } = useForm();
 
-  const password = watch("password");
   const navigate = useNavigate()
 
+  const registerMutation = useRegister();
+  const googleMutation = useGoogleAuth();
 
-  const onSubmit = async (data) => {
-    const { email, password } = data;
-
-    try {
-      const { data: resData, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: "https://e-commerce-shopping-2.netlify.app/login",
-        },
-      });
-
-      if (error) {
+  // 🔐 Email Signup
+  const onSubmit = (data) => {
+    registerMutation.mutate(data, {
+      onSuccess: () => {
+        toast.success("Check your email to confirm your account");
+        navigate("/verify-email", { state: { email: data.email } });
+        reset();
+      },
+      onError: (error) => {
         toast.error(error.message || "Signup failed");
-      } else {
-        toast.warning("Check your email to confirm your account");
-        navigate("/verify-email", { state: { email } });
-      }
-    } catch (err) {
-      toast.error("Signup failed");
-    }
-
-    reset();
+      },
+    });
   };
+
+  // 🔴 Google Login
+  const handleGoogleLogin = () => {
+    googleMutation.mutate(undefined, {
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+    console.log(handleGoogleLogin);
+  };
+
+
+
+
+  // return (
+  //   <div className="max-w-md mx-auto p-6 bg-white shadow rounded-xl">
+  //     <h2 className="text-xl font-bold mb-4">Create Account</h2>
+
+  //     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+  //       <input
+  //         {...register("email")}
+  //         placeholder="Email"
+  //         className="w-full border p-2 rounded"
+  //       />
+
+  //       <input
+  //         {...register("password")}
+  //         type="password"
+  //         placeholder="Password"
+  //         className="w-full border p-2 rounded"
+  //       />
+
+  //       <button
+  //         type="submit"
+  //         disabled={registerMutation.isPending}
+  //         className={`w-full py-2 rounded text-white ${registerMutation.isPending
+  //           ? "bg-gray-400"
+  //           : "bg-rose-600 hover:bg-rose-700"
+  //           }`}
+  //       >
+  //         {registerMutation.isPending ? "Creating..." : "Sign Up"}
+  //       </button>
+  //     </form>
+
+  //     {/* Divider */}
+  //     <div className="my-4 text-center text-gray-400">or</div>
+
+  //     {/* Google Button */}
+  //     <button
+  //       onClick={handleGoogleLogin}
+  //       disabled={googleMutation.isPending}
+  //       className="w-full py-2 border rounded flex items-center justify-center gap-2 hover:bg-gray-100"
+  //     >
+  //       {googleMutation.isPending ? "Redirecting..." : "Continue with Google"}
+  //     </button>
+  //   </div>
+  // );
+
+  // const password = watch("password");
+  // const onSubmit = async (data) => {
+  //   const { email, password } = data;
+
+  //   try {
+  //     const { data: resData, error } = await supabase.auth.signUp({
+  //       email,
+  //       password,
+  //       options: {
+  //         emailRedirectTo: "https://e-commerce-shopping-2.netlify.app/login",
+  //       },
+  //     });
+
+  //     if (error) {
+  //       toast.error(error.message || "Signup failed");
+  //     } else {
+  //       toast.warning("Check your email to confirm your account");
+  //       navigate("/verify-email", { state: { email } });
+  //     }
+  //   } catch (err) {
+  //     toast.error("Signup failed");
+  //   }
+
+  //   reset();
+  // };
+
+
+
+  // const queryClient = useQueryClient();
+
+
+  // useEffect(() => {
+  //   const { data: listener } = supabase.auth.onAuthStateChange(
+  //     (event, session) => {
+  //       if (event === "SIGNED_IN") {
+  //         queryClient.invalidateQueries(["user"]);
+  //       }
+
+  //       if (event === "SIGNED_OUT") {
+  //         queryClient.setQueryData(["user"], null);
+  //       }
+  //     }
+  //   );
+
+  //   return () => listener.subscription.unsubscribe();
+  // }, []);
+
+  // const handleLogin = async () => {
+  //   await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //     options: {
+  //       redirectTo: "http://localhost:5173",
+  //     },
+  //   });
+  // };
+
+  // const signInWithGoogle = async () => {
+  //   await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //     options: {
+  //       redirectTo: window.location.origin,
+  //     }
+  //   });
+  // };
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 border-b-black">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -177,8 +296,9 @@ const Register = () => {
               </span>
             )}
           </div>
+        </form>
 
-          <div>
+        {/* <div>
             <button
               type="submit"
               className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
@@ -186,22 +306,54 @@ const Register = () => {
             >
               {isSubmitting ? "Creating Account..." : "Register"}
             </button>
-          </div>
-        </form>
+          </div> */}
+        <button
+          type="submit"
+          disabled={registerMutation.isPending}
+          className={`w-full cursor-pointer py-2 rounded mt-5 text-white ${registerMutation.isPending
+            ? "bg-gray-400"
+            : "bg-rose-600 hover:bg-rose-700"
+            }`}
+        >
+          {registerMutation.isPending ? "Creating..." : "Sign Up"}
+        </button>
 
-        <p className="mt-10 text-center text-sm/6 text-gray-400">
-          You're member?{" "}
-          <a
-            onClick={() => navigate("/login")}
-            href="#"
-            className="font-semibold text-indigo-400 hover:text-indigo-300"
-          >
-            Sign in
-          </a>
-        </p>
+        {/* Divider */}
+        <div className="my-4 text-center text-gray-400">or</div>
+
+        {/* Google Button */}
+        <button
+          onClick={handleGoogleLogin}
+          disabled={googleMutation.isPending}
+          className="w-full py-2 cursor-pointer border rounded flex items-center justify-center gap-2 hover:bg-gray-100 hover:text-black"
+        >
+          {googleMutation.isPending ? "Redirecting..." : "Continue with Google"}
+        </button>
+
       </div>
     </div>
+
+
+
   );
 };
 
 export default Register;
+
+
+{/* //       <p className="mt-10 text-center text-sm/6 text-gray-400"> */ }
+{/* //         You're member?{" "} */ }
+//         <a
+//           onClick={() => navigate("/login")}
+//           href="#"
+//           className="font-semibold text-indigo-400 hover:text-indigo-300"
+//         >
+//           Sign in
+//         </a>
+//       </p>
+//        <button
+//         onClick={handleLogin}
+//         className="w-full py-2 cursor-pointer bg-red-500 text-white rounded-lg"
+//       >
+//         Continue with Google
+//       </button>

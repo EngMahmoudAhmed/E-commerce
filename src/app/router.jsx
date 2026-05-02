@@ -10,6 +10,7 @@ import ProtectedRoute from "../routes/ProtectedRoute.jsx";
 import Cart from "../pages/Cart.jsx";
 import Checkout from "../pages/Checkout.jsx"
 import Dashboard from "../pages/Dashboard.jsx";
+import AdminRoute from "../routes/AdminRoute.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -36,14 +37,17 @@ export const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <Dashboard />
+        element:
+          <AdminRoute>
+            <Dashboard />
+          </AdminRoute>
       },
       {
         path: "cart",
         element: (
-          // <ProtectedRoute>
-          <Cart />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
         ),
       },
       {

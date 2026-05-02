@@ -6,25 +6,39 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null)
   const [loading, setLoading] = useState(true);
+
+
+  const fetchRole = async (userId) => {
+    const { data } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', userId)
+      .single();
+    setRole(data?.role || 'user');
+  };
 
   useEffect(() => {
     // 1. Load session on app start
-    supabase.auth.getSession().then(({ data }) => {
-      setUser(data.session?.user ?? null);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      if (session?.user) fetchRole(session.user.id);
       setLoading(false);
     });
 
     // 2. Listen to all auth state changes (including login, logout, email confirmation)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       setUser(session?.user ?? null);
+      if (session?.user) fetchRole(session.user.id);
+      else setRole(null);
       setLoading(false);
 
       // Handle email confirmation from URL hash
       if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
         // Session is now available
       }
-      
+
       if (event === "EMAIL_CONFIRMED") {
         // Email was just confirmed
       }
@@ -77,7 +91,7 @@ function AuthProvider({ children }) {
   }, [user?.id]);
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, role, loading }}>
       {children}
     </AuthContext.Provider>
   );

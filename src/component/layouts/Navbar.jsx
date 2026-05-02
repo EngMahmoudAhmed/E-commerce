@@ -4,10 +4,11 @@ import supabase from "../../lib/supabase";
 import { useAuth } from "../../context/auth/AuthContext";
 import { useTheme } from "../../context/theme/ThemeContext";
 import { CartContext } from "../../context/cart/CartContext";
+import AdminRoute from "../../routes/AdminRoute";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, role } = useAuth();
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
   const { cart } = useContext(CartContext);
@@ -31,7 +32,13 @@ const Navbar = () => {
     { name: "Home", path: "/home" },
     { name: "AboutUs", path: "/aboutus" },
     { name: "Products", path: "/products" },
-    { name: "Dashboard", path: "/dashboard" },
+    ...(user?.role === "admin"
+      ? [{ name: "Dashboard", path: "/dashboard" }]
+      : []),
+    // { name: "Dashboard", path: "/dashboard" },
+    // <AdminRoute>
+
+    // </AdminRoute>
   ];
 
   return (
@@ -47,6 +54,7 @@ const Navbar = () => {
             <nav aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
                 {navItems.map((item) => (
+                  // if (role !== user?.role) return <div>Loading...</div>;
                   <li key={item.name}>
                     <Link
                       to={item.path}
@@ -64,10 +72,10 @@ const Navbar = () => {
                 className="mr-2 cursor-pointer inline-flex items-center justify-center rounded-md p-2 hover:bg-gray-500 dark:bg-gra"
                 aria-label="Toggle theme"
               >
-                {theme === "dark" ? ("🌙" ) : ("☀️")}
+                {theme === "dark" ? ("🌙") : ("☀️")}
               </button>
 
-              {user &&(
+              {!user && (
                 <Link to="/cart">
                   Cart 🛒 ({cartCount})
                 </Link>
@@ -77,14 +85,14 @@ const Navbar = () => {
               {!user && (
                 <div className="hidden sm:flex sm:gap-4">
                   <Link
-                    // className="cursor-pointer block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                    className="cursor-pointer block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
                     to="/login"
                   >
                     Login
                   </Link>
 
                   <Link
-                    // className="cursor-pointer hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
+                    className="cursor-pointer hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
                     to="/register"
                   >
                     Register

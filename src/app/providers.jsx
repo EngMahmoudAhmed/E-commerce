@@ -5,6 +5,7 @@ import ThemeProvider, { useTheme } from "../context/theme/ThemeContext";
 import { CartProvider } from "../context/cart/CartContext";
 import { PaymentProvider } from "../context/payment/PaymentContext";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+
 export const Providers = ({ children }) => {
 
   const querClient = new QueryClient();
@@ -12,14 +13,14 @@ export const Providers = ({ children }) => {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <CartProvider>
-          <PaymentProvider>
-            <ToastWithTheme />
-            <QueryClientProvider client={querClient}>
+        <QueryClientProvider client={querClient}>
+          <CartProvider>
+            <PaymentProvider>
+              <ToastWithTheme />
               {children}
-            </QueryClientProvider>
-          </PaymentProvider>
-        </CartProvider>
+            </PaymentProvider>
+          </CartProvider>
+        </QueryClientProvider>
       </AuthProvider>
     </ThemeProvider>
   );

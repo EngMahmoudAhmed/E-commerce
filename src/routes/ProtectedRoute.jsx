@@ -1,21 +1,22 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+// import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../context/auth/AuthContext";
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
 
-  if (loading) {
-    return <div>Loading...</div>; // Skeleton / Spinner
-  }
+  // if (loading) {
+  //   // return <div>Loading...</div>; // Skeleton / Spinner
+  // }
+  if (!user)  return <Navigate to={"/register"} />;
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
-
-  if (!user.email_confirmed_at) {
-    return <Navigate to="/verify-email" />;
-  }
-
+  // if (!user) {
+  //   return <Navigate to="/login" />;
+  // }
+  // if (!user.email_confirmed_at) {
+  //   return <Navigate to="/verify-email" />;
+  // }
+  
   return children;
 }
 
