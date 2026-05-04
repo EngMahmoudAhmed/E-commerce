@@ -7,8 +7,8 @@ const AdminRoute = ({ children }) => {
     if (!user) return <Navigate to={"/login"} />;
     if (role !== 'admin') return <Navigate to={"/products"} />;
     
-    console.log("role");
-    console.log(user);
+    // console.log("role");
+    // console.log(user);
     
     // if (role === 'admin') return <Navigate to={"/dashboard"} />;
     return children;
