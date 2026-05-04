@@ -6,45 +6,51 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState(null)
+  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
   const fetchRole = async (userId) => {
-    const { data } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', userId)
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", userId)
       .single();
-    setRole(data?.role || 'user');
+
+    if (error) {
+      console.error(
+        "Supabase error details:",
+        error.message,
+        error.details,
+        error.hint
+      );
+      return null;
+    }
+
+    return data?.role ?? "user";
   };
 
   useEffect(() => {
-    // 1. Load session on app start
+    const applySession = async (session) => {
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        const r = await fetchRole(session.user.id);
+        setRole(r);
+      } else {
+        setRole(null);
+      }
+      setLoading(false);
+    };
+
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      if (session?.user) fetchRole(session.user.id);
-      setLoading(false);
+      applySession(session);
     });
 
-    // 2. Listen to all auth state changes (including login, logout, email confirmation)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) fetchRole(session.user.id);
-      else setRole(null);
-      setLoading(false);
-
-      // Handle email confirmation from URL hash
-      if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
-        // Session is now available
-      }
-
-      if (event === "EMAIL_CONFIRMED") {
-        // Email was just confirmed
-      }
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      applySession(session);
     });
 
-    // 3. Check for email confirmation hash in URL
     const handleEmailConfirmation = async () => {
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
       const accessToken = hashParams.get("access_token");
@@ -60,8 +66,6 @@ function AuthProvider({ children }) {
           if (error) {
             toast.error("Error confirming email:", error);
           } else if (data.session) {
-            // Email confirmed successfully
-            // Remove hash from URL
             window.history.replaceState(null, "", window.location.pathname);
           }
         } catch (error) {
@@ -84,11 +88,23 @@ function AuthProvider({ children }) {
       await supabase.from("profiles").upsert({
         id: user.id,
         email: user.email,
+        role: user.role,
       });
     };
 
     createProfile();
   }, [user?.id]);
+
+  // Only insert if the profile doesn't exist
+// const { data: existingProfile } = await supabase
+//   .from('profiles')
+//   .select('id')
+//   .eq('id', user.id)
+//   .single();
+
+// if (!existingProfile) {
+//   await supabase.from('profiles').insert({ id: user.id, ...otherData });
+// }
 
   return (
     <AuthContext.Provider value={{ user, role, loading }}>

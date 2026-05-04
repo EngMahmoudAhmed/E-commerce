@@ -32,7 +32,8 @@ const Navbar = () => {
     { name: "Home", path: "/home" },
     { name: "AboutUs", path: "/aboutus" },
     { name: "Products", path: "/products" },
-    ...(user?.role === "admin"
+    // { name: "Dashboard", path: "/dashboard" }
+    ...(role === "admin"
       ? [{ name: "Dashboard", path: "/dashboard" }]
       : []),
     // { name: "Dashboard", path: "/dashboard" },
@@ -75,7 +76,7 @@ const Navbar = () => {
                 {theme === "dark" ? ("🌙") : ("☀️")}
               </button>
 
-              {!user && (
+              {(!user || user) && (
                 <Link to="/cart">
                   Cart 🛒 ({cartCount})
                 </Link>

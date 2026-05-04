@@ -20,7 +20,7 @@ function ProductCard({ product }) {
       className=" hover:shadow-gray-700 rounded-2xl shadow-xl transition overflow-hidden">
       <img
         src={product.image}
-        alt={product.title}
+        alt="Product Image"
         className="h-48 w-full object-cover"
       />
 
