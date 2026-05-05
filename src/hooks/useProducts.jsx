@@ -7,5 +7,6 @@ export const useProducts = () => {
         queryFn: fetchPublishedProducts,
         staleTime: 1000 * 60 * 5,
         cacheTime: 1000 * 60 * 10,
+        refetchOnMount: false,
     });
 };

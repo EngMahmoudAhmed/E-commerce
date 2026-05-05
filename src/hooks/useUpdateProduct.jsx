@@ -7,7 +7,13 @@ export const useUpdateProduct = () => {
     return useMutation({
         mutationFn: updateProduct,
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey:['products']});
+            queryClient.invalidateQueries({ queryKey: ['products'] });
         },
     });
+    {
+        console.log("sending", {
+            id: product.id,
+            formData
+        });
+    }
 };

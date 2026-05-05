@@ -6,7 +6,7 @@ import { useAuth } from "../context/auth/AuthContext"
 
 function ProductCard({ product }) {
 
-  const {user} = useAuth()
+  const { user } = useAuth()
 
   const { addToCart, cart } = useContext(CartContext);
 
@@ -48,7 +48,7 @@ function ProductCard({ product }) {
             // disabled={addToCart.isPending}
             className="px-4 m-auto py-2 cursor-pointer bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-900 transition"
           >
-               {addToCart.isPending ? "Saving..." : "Add" }
+            {addToCart.isPending ? "Saving..." : "Add"}
 
           </button>
         </div>

@@ -1,9 +1,13 @@
 import supabase from "../../lib/supabase";
+import { useGoogleAuth } from "../../hooks/useGoogleAuth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Login = () => {
+
+  const googleMutation = useGoogleAuth();
+
   const {
     register,
     handleSubmit,
@@ -51,6 +55,17 @@ const Login = () => {
       reset();
     }, 100);
   };
+
+const handleGoogleLogin = () => {
+    googleMutation.mutate(undefined, {
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+    console.log(handleGoogleLogin);
+  };
+
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 border-b-black">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -150,6 +165,17 @@ const Login = () => {
           >
             Start a 14 day free trial
           </button>
+
+          <div className="my-4 text-center text-gray-400">or</div>
+
+        {/* Google Button */}
+        <button
+          onClick={handleGoogleLogin}
+          disabled={googleMutation.isPending}
+          className="w-full py-2 cursor-pointer border rounded flex items-center justify-center gap-2 hover:bg-gray-100 hover:text-black"
+        >
+          {googleMutation.isPending ? "Redirecting..." : "Continue with Google"}
+        </button>
         </p>
       </div>
     </div>
