@@ -187,15 +187,6 @@ const Register = () => {
           </div>
         </form>
 
-        {/* <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center cursor-pointer rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Creating Account..." : "Register"}
-            </button>
-          </div> */}
         <button
           type="submit"
           disabled={registerMutation.isPending}
@@ -228,21 +219,3 @@ const Register = () => {
 };
 
 export default Register;
-
-
-{/* //       <p className="mt-10 text-center text-sm/6 text-gray-400"> */ }
-{/* //         You're member?{" "} */ }
-//         <a
-//           onClick={() => navigate("/login")}
-//           href="#"
-//           className="font-semibold text-indigo-400 hover:text-indigo-300"
-//         >
-//           Sign in
-//         </a>
-//       </p>
-//        <button
-//         onClick={handleLogin}
-//         className="w-full py-2 cursor-pointer bg-red-500 text-white rounded-lg"
-//       >
-//         Continue with Google
-//       </button>

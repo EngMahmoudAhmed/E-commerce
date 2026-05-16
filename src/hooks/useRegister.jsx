@@ -11,7 +11,10 @@ export const useRegister = () => {
                 password,
                 options: {
                     emailRedirectTo:
-                        "https://e-commerce-shopping-2.netlify.app/login",
+                        `${window.location.origin}/home`
+                    //     "https://e-commerce-shopping-2.netlify.app/login",
+                    // redirectTo: `${window.location.origin}/home`,
+
                 },
             });
 
