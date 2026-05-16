@@ -9,8 +9,7 @@ export const useGoogleAuth = () => {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: "google",
                 options: {
-                    // redirectTo: `${window.location.origin}/home`,
-                    redirectTo: "https://e-commerce-shopping-2.netlify.app/login",
+                    redirectTo: `${window.location.origin}/home`,
                 },
             });
 
